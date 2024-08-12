@@ -7,6 +7,8 @@ import { QuestionsModule } from './questions/questions.module';
 import { HeaderModule } from './header/header.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { OptionComponent } from './option/option.component';
+import { OptionModule } from './option/option.module';
 
 
 @NgModule({
@@ -17,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     HeaderModule,
     QuestionsModule,
+    OptionModule,
     AppRoutingModule,
 
   ],

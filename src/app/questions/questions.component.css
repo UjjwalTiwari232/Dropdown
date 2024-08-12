@@ -5,10 +5,10 @@
     
 }
 
-.setProperty , p {
+/* .setProperty , p {
     justify-content: left;
     margin-left: 43px;
-}
+} */
 
 input{
     width:55%;
@@ -16,6 +16,10 @@ input{
     padding-left: 4px;
     padding-right: 4px;
     margin-top: 20px;
+}
+
+.app-option{
+    width: 100%;
 }
 
 label{
@@ -27,3 +31,13 @@ select{
     padding-left:4px ;
     padding-right: 4px;
 }
+.btn{
+    display: flex;
+    align-items: end;
+    justify-self: end;
+}
+button{
+    align-items: end;
+    justify-content: end;
+}
+
