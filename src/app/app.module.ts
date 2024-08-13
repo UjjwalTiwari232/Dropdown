@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OptionComponent } from './option/option.component';
 import { OptionModule } from './option/option.module';
+import { AddCorrectOptionsComponent } from './add-correct-options/add-correct-options.component';
 
 
 @NgModule({

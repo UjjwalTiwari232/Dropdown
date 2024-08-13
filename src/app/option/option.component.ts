@@ -4,32 +4,37 @@ import { AppService } from '../shared/DataService';
 
 @Component({
   selector: 'app-option',
-  template: `
-    <div class="option">
-      <div>
-        <p>Option ID: {{ option.id }}</p>
-        <input class="option-text" type="text" [(ngModel)]="option.option" placeholder="Enter Option" />
-      </div>
-      <div class="icons">
-        <i class="fa-solid fa-location-dot"></i>
-        <i class="fa-solid fa-trash" (click)="deleteToken(option.id)"></i>
-        Delete
-      </div>
-
-      
-      
-    </div>
-  `,styleUrls:['./option.component.css']
+  templateUrl:'./option.component.html' ,
+  styleUrls:['./option.component.css']
 })
 export class OptionComponent implements OnInit {
   optionsList:IOption[] = [];
+  _filter: string = "";
+  current_Option:IOption | null= null ;
+  @Input() get filter() {
+      return this._filter;
+  }
+  
+  set filter(val: string) { 
+      this.option.option = val;
+      console.log(this.option)
+      this.appService.updateOption(this.option);
+
+      
+  }
+
   constructor(private  appService: AppService, viewRef: ViewContainerRef) {
     this.appService.viewRef = viewRef;
+    this.appService.optionsList$.subscribe(options => {
+      this.optionsList = options;
+    });
+    console.log("Constructor of Option called");
     
   }
 
   ngOnInit(): void {
-    // this.optionsList = this.appService.getOptions();
+    this.optionsList = this.appService.getOptions();
+    console.log("Console: ",this.appService.getOptions());
   }
   @Input() option: IOption = { id: 0, option: '', isCorrect: false }; // Default value
 

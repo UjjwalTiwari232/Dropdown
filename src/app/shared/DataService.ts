@@ -18,13 +18,13 @@ export class AppService {
     addQuestion(question: IQuestions) {
         const currentQuestions = this.questionsListSubject.value;
         this.questionsListSubject.next([...currentQuestions, question]);
-        localStorage.setItem("questionList",JSON.stringify(this.questionsListSubject.value));
+        // localStorage.setItem("questionList",JSON.stringify(this.questionsListSubject.value));
     }
   
     addOption(option: IOption) {
         const currentOptions = this.optionsListSubject.value;
         this.optionsListSubject.next([...currentOptions, option]);
-        localStorage.setItem("optionList",JSON.stringify(this.questionsListSubject.value));
+        // localStorage.setItem("optionList",JSON.stringify(this.questionsListSubject.value));
     }
 
       // New method to delete an option by its ID
@@ -42,6 +42,18 @@ export class AppService {
         this.viewRef.createComponent(OptionComponent);
     }
 
+    updateOption(updatedOption:IOption){
+        const currentOptions = this.optionsListSubject.value;
+        
+        for(let i = 0 ;i<currentOptions.length;i++){
+            if(currentOptions[i].id == updatedOption.id){
+                currentOptions[i] = updatedOption;
+                console.log("hello",currentOptions[i]);
+            }
+        }
+        this.optionsListSubject.next([...currentOptions]);
+        console.log(this.optionsListSubject.value);
+    }
 
     // Method to get questions list
     // getQuestions(): IQuestions[] {
@@ -54,9 +66,9 @@ export class AppService {
     // }
 
     // Method to get options list
-    // getOptions(): IOption[] {
-    //     return this.optionsList;
-    // }
+    getOptions(): IOption[] {
+        return this.optionsListSubject.value;
+    }
 
     // Method to add an option
     // addOption(option: IOption) {

@@ -23,15 +23,13 @@ export class QuestionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    console.log("Question OnInit Called")
     this.appService.questionsList$.subscribe(questions => {
       this.questionsList = questions; 
     });
     this.appService.optionsList$.subscribe(options => {
       this.optionsList = options;
     });
-    // localStorage.setItem("questionList",JSON.stringify(this.questionsList));
-    // localStorage.setItem("optionList",JSON.stringify(this.optionsList));
     if(this.questionsList.length || this.questionsList.length==0){
        console.log(JSON.parse(localStorage.getItem("questionList")!));
     }

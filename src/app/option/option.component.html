@@ -1,5 +1,12 @@
-<!-- <div>
-    <p>option works!</p>
-    <i class="fa-solid fa-location-dot"></i>
-    <i class="fa-solid fa-trash" (click)="deleteToken()"></i>
-</div> -->
+<div class="option">
+    <div>
+      <p>Option ID: {{ option.id }}</p>
+      <input class="option-text" type="text" [(ngModel)]="filter" placeholder="Enter Option" />
+    </div>
+    <div class="icons">
+      <i class="fa-solid fa-location-dot"></i>
+      <i class="fa-solid fa-trash" (click)="deleteToken(option.id)"></i>
+      Delete
+    </div>
+  </div>
+
