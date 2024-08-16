@@ -1,25 +1,26 @@
 
 
-import { Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef,ChangeDetectionStrategy, Component, ComponentFactoryResolver, Inject, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { IOption, IQuestions } from '../shared/interface';
 import { OptionsHostDirective } from './question.directive';
 import { AppService } from '../shared/DataService';
+
 
 @Component({
   selector: 'app-questions',
   templateUrl: './questions.component.html',
   styleUrls: ['./questions.component.css'],
-  providers: [AppService]
+  providers: [AppService],
 })
 export class QuestionsComponent implements OnInit {
-
+  
   questionsList: IQuestions[] = [];
   optionsList:IOption[] = [];
   Tokens: string[] = ['Token1', 'Token2', 'Token3']; // Example tokens
 
   constructor(private  appService: AppService, viewRef: ViewContainerRef) {
     this.appService.viewRef = viewRef;
-    
+    console.log("question constructor called");
   }
 
   ngOnInit(): void {

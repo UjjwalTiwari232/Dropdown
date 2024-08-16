@@ -1,12 +1,23 @@
-<div class="option">
+<!-- <div class="option">
     <div>
       <p>Option ID: {{ option.id }}</p>
-      <input class="option-text" type="text" [(ngModel)]="filter" placeholder="Enter Option" />
+      <input class="option-text" type="text" [(ngModel)]="filter"  placeholder="Enter Option" />
     </div>
     <div class="icons">
       <i class="fa-solid fa-location-dot"></i>
       <i class="fa-solid fa-trash" (click)="deleteToken(option.id)"></i>
       Delete
     </div>
+</div> -->
+<div class="option">
+  <div>
+    <p>Option ID: {{ option.id }}</p>
+    <filter-textbox [option]= option (changed)="onChange($event)"></filter-textbox>
   </div>
+  <div class="icons">
+    <i class="fa-solid fa-location-dot"></i>
+    <i class="fa-solid fa-trash" (click)="deleteToken(option.id)"></i>
+    Delete
+  </div>
+</div>
 

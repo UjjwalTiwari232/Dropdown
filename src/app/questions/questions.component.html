@@ -1,25 +1,4 @@
-<!-- <p>questions works!</p>
 
-<div>
-    <input type="text" placeholder="Enter Question">
-</div>
-<br/>
-<br>
-<div class="option" *ngFor="let i of count">
-    <app-option [count] ="token"></app-option>
-</div>
-<button (click)="addToken()">Add Another Token</button>
-<div class="setProperty">
-   <p>Token {{ tokenId}} </p>
-   <label id="cars"></label>
-   <select id="token" >
-     <option value="volvo" *ngFor="let token of Tokens">{{token}}</option>
-    
-   </select>
-   
-</div>
-
- -->
  <p>Questions work!</p>
 
  <div>
@@ -32,7 +11,7 @@
    <button (click)="addToken()">Add Another Token</button>
  </div>
  <br/>
- <div class="options" *ngFor="let i of optionsList">
+ <div class="options" *ngFor="let i of optionsList ">
    <app-option class="app-option" [option]="{ id: i.id, option: i.option, isCorrect: i.isCorrect }"></app-option>
  </div>
  
