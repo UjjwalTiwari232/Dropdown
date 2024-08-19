@@ -1,37 +1,67 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+// import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+// import { AppService } from "../shared/DataService";
+// import { IOption } from "../shared/interface";
+
+// @Component({
+//     selector:'filter-textbox',
+//     template:`
+//         <input type="text" [(ngModel)]="filter"/>
+//     `
+
+// })
+
+// export class FilterTextboxComponent implements OnInit{
+
+//     private _filter:string = "";
+//     @Input() get filter(){
+//         return this._filter;
+//     }
+
+//     set filter(val:string){
+//         this._filter = val;
+//         this.option.option = val;
+//         console.log(this.option);
+//         // this.changed.emit(this._filter); //Raise Change Event
+//         this.appService.updateOption(this.option)
+//     }
+
+//     @Input() option: IOption = { id: 0, option: '', isCorrect: false }; // Default value
+
+//     constructor( private appService: AppService ) {}
+
+//     ngOnInit(): void {
+        
+//     }
+// }
+
+import { Component, Input, OnInit } from "@angular/core";
 import { AppService } from "../shared/DataService";
 import { IOption } from "../shared/interface";
 
 @Component({
-    selector:'filter-textbox',
-    template:`
+    selector: 'filter-textbox',
+    template: `
         <input type="text" [(ngModel)]="filter"/>
     `
-
 })
+export class FilterTextboxComponent implements OnInit {
 
-export class FilterTextboxComponent implements OnInit{
+    private _filter: string = "";
 
-    private _filter:string = "";
-    @Input() get filter(){
+    @Input() get filter() {
         return this._filter;
     }
 
-    set filter(val:string){
+    set filter(val: string) {
         this._filter = val;
         this.option.option = val;
-        console.log(this.option);
-        // this.changed.emit(this._filter); //Raise Change Event
-        this.appService.updateOption(this.option)
+        this.appService.updateOption(this.option);
     }
 
     @Input() option: IOption = { id: 0, option: '', isCorrect: false }; // Default value
 
-    @Output() changed: EventEmitter<string> = new EventEmitter<string>();
-    constructor( private appService: AppService ) {}
+    constructor(private appService: AppService) {}
 
-    ngOnInit(): void {
-        
-    }
+    ngOnInit(): void {}
 }
 

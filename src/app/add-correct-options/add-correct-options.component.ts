@@ -14,9 +14,9 @@ export class AddCorrectOptionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.optionsList$.subscribe(options =>{
-      this.optionsList = options;
-    })
+    // this.appService.optionsList$.subscribe(options =>{
+      // this.optionsList = options;
+    // })
   }
 
 }
