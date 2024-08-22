@@ -13,7 +13,7 @@ import { IOption } from "../shared/interface";
         width: 95%;
         height:35px;
         border: none;
-        margin-left: 6px;
+        
         }
     
     input:focus{

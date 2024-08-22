@@ -1,31 +1,11 @@
-/* *{  
+*{  
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0;
+    padding: 0;
     
 }
 
-.option{
-    width: 55%;
-    height: 35px;
-    padding-left: 4px;
-    padding-right: 4px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid black;
-}
-
-
-
-.icons{
-    width: 15%;
-    justify-content: space-between;
-} */
-
-    .option {
+.option {
 
     display: flex;
     flex-direction: row;
@@ -34,69 +14,67 @@
     margin: 10px 0;
     position: relative; 
     justify-content: space-between;
-    }
+}
 
-    .option > div {
+.option > div {
     margin-bottom: 10px;
-    }
+}
 
-    .icons {
+.icons {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
     align-items: center;
-    }
+}
 
-    .icons .fa-trash {
+.icons .fa-trash {
     font-size: 18px;
     color: #1E7953; 
     cursor: pointer;
     margin-right: 8px;
-    }
+}
 
-    .icons .fa-trash:hover {
+.icons .fa-trash:hover {
     color: #42da9b; 
-    }
+}
 
 
-    
-    .icons span {
+
+.icons span {
     font-size: 14px;
     color: #333;
     cursor: pointer;
     margin-left: 5px
-    }
+}
 
-    .icons span:hover {
+.icons span:hover {
     text-decoration: underline; 
-    }
+}
 
-    p {
+p {
     font-size: 16px;
     margin: 0;
     color: #333;
-    }
+}
 
-    filter-textbox {
-        
-        width: 100%;
-    }
+filter-textbox {
+    
+    width: 100%;
+}
 
-    .content{
-        display: flex;
-        flex-direction: row;
-        /* align-items: center; */
-        width: 95%;
-        height: 100%;
-        border: 1px solid #E5E5E5;
-        /* padding: 8px; */
-        
-    }
-    .start-icon{
-        display: flex;
-        /* height: inherit; */
-        align-items: center;
-        padding-right: 8px;
-        padding-left: 8px;
-        border-right: 1px solid #0f0f0f;
-    }
+.content{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    height: 100%;
+    border: 1px solid #E5E5E5;
+    
+    
+}
+.start-icon{
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    padding-left: 8px;
+    border-right: 1px solid #E5E5E5;
+}

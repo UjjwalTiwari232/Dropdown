@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IOption, IToken } from '../shared/interface';
 import { AppService } from '../shared/DataService';
 import { Token } from '@angular/compiler';
@@ -12,9 +12,9 @@ export class TokenComponent  implements OnInit  {
   optionsList: IOption[] = [];
 
 
-  @Input()
-  token!: IToken;
+  @Input() token!: IToken;
 
+  @Output() changesInToken: EventEmitter<IToken> = new EventEmitter<IToken>();
 
   constructor (private appService: AppService) {
     // console.log("Length of Token:" ,this.token.optionList.length);
@@ -47,10 +47,14 @@ export class TokenComponent  implements OnInit  {
       isCorrect: false
     };
     this.token.optionList.push(newOption);
+    this.changesInToken.emit(this.token);
     console.log("Length of List:" ,this.token.optionList.length);
   }
 
   updateTheList(newOptionList:IOption[]){
     this.token.optionList = newOptionList;
+    this.changesInToken.emit(this.token);
+    console.log("send the Token",this.token.id," for updation");
+    
   }
 }

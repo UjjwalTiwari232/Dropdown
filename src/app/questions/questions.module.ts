@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { OptionModule } from '../option/option.module';
 import { CoreModule } from '../shared/core.module';
 import { TokenModule } from '../token/token.module';
+import { AddCorrectOptionsModule } from '../add-correct-options/add-correct-options.module';
 
 
 
@@ -18,6 +19,7 @@ import { TokenModule } from '../token/token.module';
     FormsModule,
     OptionModule,
     TokenModule,
+    AddCorrectOptionsModule,
     CoreModule,
     QuestionsRoutingModule
   ],

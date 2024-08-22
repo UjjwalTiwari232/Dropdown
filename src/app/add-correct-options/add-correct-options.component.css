@@ -1,0 +1,40 @@
+.setProperty {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust spacing between elements as needed */
+}
+
+.setProperty p {
+    margin: 0; /* Remove default margin */
+}
+
+#setProperty-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+#setProperty-container select {
+    width: 180px; /* Set a standard width for the select element */
+    padding: 5px; /* Optional: add padding for better appearance */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+#setProperty-container label {
+    color: red;
+    font-size: 12px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+}
+
+#setProperty-container .has-error select {
+    border: 1px solid red;
+}
+
+#setProperty-container .has-error label {
+    display: block; /* Show error message if there's an error */
+}
+

@@ -43,7 +43,7 @@ export class OptionComponent implements OnInit {
       option: '',
       isCorrect: false
     };
-
+    
     // this.appService.addOption(newOption);
     // this.optionList = this.appService.getOptions(); // Refresh the options list
   }

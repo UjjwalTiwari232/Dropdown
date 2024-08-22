@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IOption, IQuestions, IToken } from '../shared/interface';
 import { AppService } from '../shared/DataService';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-questions',
@@ -25,6 +26,9 @@ export class QuestionsComponent implements OnInit {
   }];
   Tokens: string[] = ['Token1', 'Token2', 'Token3']; 
   correctOptionsCount = 1;
+
+  @Input() token!: IToken;
+
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
@@ -77,10 +81,18 @@ export class QuestionsComponent implements OnInit {
         value.optionList.push(newOption);
       }
     })
-    // this.optionsList.push()
-    // this.appService.addOption(newOption);
+    
   }
   addAnotherCorrecOption(){
     this.correctOptionsCount++;
+  }
+
+  updateTheList(updatedToken:IToken){
+    this.TokenList.forEach( (value,index) =>{
+      if(value.id === updatedToken.id){
+        value.optionList = updatedToken.optionList;
+        console.log("Token",updatedToken.id,"is updated and has OptionList length of",value.optionList.length);
+      }
+    });
   }
 }
