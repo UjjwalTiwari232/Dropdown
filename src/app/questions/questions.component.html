@@ -71,18 +71,8 @@
     <br>
     <div class="addCorrectOptions" >
       <div class="addCorrectOptions-dropDown" *ngFor="let i of TokenList">
-        <app-add-correct-options [token]="i"></app-add-correct-options>
+        <app-add-correct-options [token]="i" (changesInToken)="updateTheList($event)"></app-add-correct-options>
       </div>
-    </div>
-    <div *ngFor = "let i of optionsList">
-      <!-- <app-add-correct-options [correctOption] = "optionsList[i]"></app-add-correct-options> -->
-    </div>
-    <div class="setProperty">
-      <p>Token {{ optionsList.length }}</p>
-      <label id="cars"></label>
-      <select id="token">
-        <option value="volvo" *ngFor="let token of optionsList">{{ token.option }}</option>
-      </select>
     </div>
   </div>
 </div>

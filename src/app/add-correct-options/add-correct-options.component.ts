@@ -40,7 +40,7 @@ export class AddCorrectOptionsComponent implements OnChanges {
 
   @Input() token!: IToken;
 
-  // @Output() changesInToken: EventEmitter<IToken> = new EventEmitter<IToken>();
+  @Output() changesInToken: EventEmitter<IToken> = new EventEmitter<IToken>();
 
   constructor(private appService: AppService) {    
   }
@@ -62,13 +62,19 @@ export class AddCorrectOptionsComponent implements OnChanges {
     }
   }
 
-  onOptionChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedOption = selectElement.value;
-
-    console.log("Selected Value", this.selectedOption);
-    
-    // Emit changes if needed
-    // this.changesInToken.emit(this.token);
+  onOptionChange(event: any) {
+    const selectedOption = event.target.options[event.target.selectedIndex].value;
+    console.log("Selected Option Object", selectedOption,event.target.selectedIndex);
+    let targetIndex = event.target.selectedIndex + 1;
+    this.token.optionList.forEach( (value,index) => {
+      if(value.isCorrect && value.id !== targetIndex){
+        value.isCorrect = false;
+      }
+      else if(value.id === targetIndex ){
+        value.isCorrect = true;
+      }
+    })
+    this.changesInToken.emit(this.token);
   }
+  
 }

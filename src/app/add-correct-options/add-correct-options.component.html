@@ -3,8 +3,8 @@
   <div id="setProperty-container">
     <!-- Bind the change event to the onOptionChange method -->
     <select id="token" (change)="onOptionChange($event)">
-      <!-- Use optionsList to generate options -->
-      <option *ngFor="let option of optionsList" [value]="option">{{ option }}</option>
+      <!-- Bind value to the object -->
+      <option *ngFor="let option of token.optionList" [ngValue]="option">{{ option.option }}</option>
     </select>
     <!-- Conditionally display the error message if no option is selected -->
     <label *ngIf="!selectedOption || selectedOption === 'Select'" id="error-message">Answer Option is required</label>
