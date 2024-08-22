@@ -19,7 +19,7 @@ input{
 }
 
 /* parent.component.css */
-.options {
+.tokens {
   display: flex;
   flex-direction: column;
   margin: 10px;
@@ -35,7 +35,7 @@ input{
 }
 
 button {
-  background-color: #007bff;
+  background-color: #3FD28B;
   color: white;
   border: none;
   padding: 10px 15px;
@@ -44,7 +44,7 @@ button {
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #4dbc87;
 }
 
 /* .app-option{

@@ -15,8 +15,21 @@
     
     margin: 0; 
     padding: 10px;
-    border: 1px solid #ddd;
+    /* border: 1px solid #ddd; */
     border-radius: 4px;
-    background-color: #f9f9f9;
+    background-color: white;
+  }
+  button {
+    background-color: #E2F8FE;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    border:1px solid #859DB9;
   }
   
+  button:hover {
+    background-color: #92def3;
+  }

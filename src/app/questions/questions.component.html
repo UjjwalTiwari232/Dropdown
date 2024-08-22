@@ -75,11 +75,9 @@
   <button (click)="addToken()">Add Another Token</button>
 </div>
 <br />
-<div class="options" *ngFor="let i of TokenList" >
+<div class="tokens" *ngFor="let i of TokenList" >
   <app-token [token] = "i"></app-token>
-  <div class="btn">
-    <button (click)="addOptions(i.id)" >Add Another Option</button>
-</div>
+  
 </div>
 <br>
 <div class="btn">

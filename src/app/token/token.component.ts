@@ -15,6 +15,7 @@ export class TokenComponent  implements OnInit  {
   @Input()
   token!: IToken;
 
+
   constructor (private appService: AppService) {
     // console.log("Length of Token:" ,this.token.optionList.length);
     
@@ -27,15 +28,29 @@ export class TokenComponent  implements OnInit  {
     // });
     
   }
-  addToken() {
+  // addToken() {
+    
+  //   const newOption: IOption = {
+  //     id: this.token.optionList.length + 1,
+  //     option: '',
+  //     isCorrect: false
+  //   };
+  //   this.token.optionList.push(newOption);
+  //   console.log("Length of List:" ,this.token.optionList.length);
+  //   // this.appService.addOption(newOption);
+  // }
+  addOptions() {
     
     const newOption: IOption = {
-      id: this.optionsList.length + 1,
+      id: this.token.optionList.length + 1,
       option: '',
       isCorrect: false
     };
     this.token.optionList.push(newOption);
-    // this.appService.addOption(newOption);
+    console.log("Length of List:" ,this.token.optionList.length);
   }
 
+  updateTheList(newOptionList:IOption[]){
+    this.token.optionList = newOptionList;
+  }
 }

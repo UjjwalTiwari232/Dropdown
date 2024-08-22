@@ -28,14 +28,12 @@
     .option {
 
     display: flex;
-    flex-direction: column;
-    border: 1px solid #ddd;
+    flex-direction: row;
     border-radius: 8px;
-    padding: 15px;
+    padding: 1px;
     margin: 10px 0;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: relative; 
+    justify-content: space-between;
     }
 
     .option > div {
@@ -49,21 +47,24 @@
     align-items: center;
     }
 
-    .icons i {
+    .icons .fa-trash {
     font-size: 18px;
-    color: #007bff; 
+    color: #1E7953; 
     cursor: pointer;
+    margin-right: 8px;
     }
 
-    .icons i:hover {
-    color: #0056b3; 
+    .icons .fa-trash:hover {
+    color: #42da9b; 
     }
 
+
+    
     .icons span {
     font-size: 14px;
     color: #333;
     cursor: pointer;
-    margin-left: 5px; 
+    margin-left: 5px
     }
 
     .icons span:hover {
@@ -76,17 +77,26 @@
     color: #333;
     }
 
-    .filter-textbox {
-    margin-top: 10px;
+    filter-textbox {
+        
+        width: 100%;
     }
 
-    input{
-    border: none;
-    margin-left: 6px;
+    .content{
+        display: flex;
+        flex-direction: row;
+        /* align-items: center; */
+        width: 95%;
+        height: 100%;
+        border: 1px solid #E5E5E5;
+        /* padding: 8px; */
+        
     }
-
-    input:focus{
-        border: none;
-        border-bottom:1px solid black ;
-        outline: none;
+    .start-icon{
+        display: flex;
+        /* height: inherit; */
+        align-items: center;
+        padding-right: 8px;
+        padding-left: 8px;
+        border-right: 1px solid #0f0f0f;
     }
