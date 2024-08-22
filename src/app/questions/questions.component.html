@@ -1,7 +1,7 @@
 
   <nav class="nav--section">
     <div>
-        <img src="assets/icons/logo used in header.svg" alt="Logo">
+        <img src="./../../assets/images/logo.svg" alt="Logo">
     </div>
     <div class="navigate--links">
         <a href="#">Content</a>
@@ -11,17 +11,60 @@
             <img src="assets/icons/alerts.svg" alt="">
         </a> -->
         <a href="#">
-            <img src="assets/icons/alerts.svg" alt="Alerts">
+            <img src="./../../assets/images/alerts.svg" alt="Alerts">
         </a>
         <a href="#">
-            <img src="assets/icons/announcements.svg" alt="Announcements">
+            <img src="./../../assets/images/announcements.svg" alt="Announcements">
         </a>
         <a href="#">
-            <img src="assets/icons/account_circle.svg" alt="">
+            <img src="./../../assets/images/account_circle.svg" alt="">
         </a>
     </div>
-</nav>
-  <p>Questions work!</p>
+  </nav>
+  
+
+
+<div class="main--section">
+  <div class="box">
+      <div class="arrow">
+          <a href="#">
+              <img src="./../../assets/images/back.svg" alt="">
+          </a>
+      </div>
+  </div>
+  <div class="box ">
+      <div class="title">
+          Create New Question
+      </div>
+      
+  </div>
+  <div class="box ">
+      <div class="buttons">
+          <button>Discard</button>
+          <button>Publish</button>
+          <button>Save</button>
+      </div>
+      
+  </div>
+</div>
+
+
+
+ <!-- Add Feedback -->
+ <div class="feedback--section">
+  <a href="#">Add Feedback</a>
+</div>
+
+<!-- previous button -->
+ <div class="previous-button">
+  <button>
+      PREVIOUS
+  </button>
+ </div>
+
+
+
+
 
 <div>
   <input type="text" placeholder="Enter Question" />
@@ -32,10 +75,19 @@
   <button (click)="addToken()">Add Another Token</button>
 </div>
 <br />
-<div class="options" *ngFor="let i of optionsList">
-  <app-option class="app-option" [option]="i"></app-option>
+<div class="options" *ngFor="let i of TokenList" >
+  <app-token [token] = "i"></app-token>
+  <div class="btn">
+    <button (click)="addOptions(i.id)" >Add Another Option</button>
 </div>
-
+</div>
+<br>
+<div class="btn">
+  <button (click)="addAnotherCorrecOption()">Add Another Correct Option</button>
+</div>
+<div *ngFor = "let i of optionsList">
+  <!-- <app-add-correct-options [correctOption] = "optionsList[i]"></app-add-correct-options> -->
+</div>
 <div class="setProperty">
   <p>Token {{ optionsList.length }}</p>
   <label id="cars"></label>

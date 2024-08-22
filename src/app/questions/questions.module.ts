@@ -5,6 +5,7 @@ import { QuestionsRoutingModule } from './questions-routing.module';
 import { FormsModule } from '@angular/forms';
 import { OptionModule } from '../option/option.module';
 import { CoreModule } from '../shared/core.module';
+import { TokenModule } from '../token/token.module';
 
 
 
@@ -16,6 +17,7 @@ import { CoreModule } from '../shared/core.module';
     CommonModule,
     FormsModule,
     OptionModule,
+    TokenModule,
     CoreModule,
     QuestionsRoutingModule
   ],

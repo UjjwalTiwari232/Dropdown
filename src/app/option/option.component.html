@@ -1,12 +1,16 @@
-<div class="option">
-  <div>
+
+
+<div class="option" >
+
+  <div >
     <p>Option ID: {{ option.id }}</p>
     <filter-textbox [option]= option ></filter-textbox>
   </div>
-  <div class="icons">
+  <div class="icons" >
     <i class="fa-solid fa-location-dot"></i>
     <i class="fa-solid fa-trash" (click)="deleteToken(option.id)"></i>
     Delete
   </div>
+  
 </div>
 

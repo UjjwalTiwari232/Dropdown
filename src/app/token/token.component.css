@@ -1,0 +1,22 @@
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .options {
+    display: flex;
+  
+    flex-direction: column; 
+    gap: 10px; 
+  }
+  
+  .app-option {
+    
+    margin: 0; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
