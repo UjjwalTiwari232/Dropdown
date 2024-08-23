@@ -55,8 +55,16 @@
 
 <div class="body">
   <div class="main-container">
-    <div class="input-question">
-      <input type="text" placeholder="Enter Question" />
+    <div class="btn">
+      <button (click)="addText()">Add Text</button>
+    </div>
+    <!-- <p [innerHTML]="questionString"></p> -->
+    <div class="input-question"  (mouseover)="showButton = true" (mouseleave)="showButton = false"  >
+      
+      <div #input   [innerHTML]="questionString" contenteditable="true" type="text" placeholder="Enter Question" class="input-div" ></div>
+      <div>
+        <button mat-icon-button *ngIf = "showButton" (click)="addText()"><mat-icon>Close</mat-icon></button>
+      </div>
     </div>
     <br />
     <br />
@@ -73,6 +81,9 @@
       <div class="addCorrectOptions-dropDown" *ngFor="let i of TokenList">
         <app-add-correct-options [token]="i" (changesInToken)="updateTheList($event)"></app-add-correct-options>
       </div>
+    </div>
+    <div class="addCorrectOptions">
+
     </div>
   </div>
 </div>

@@ -27,11 +27,25 @@ input{
     height: 35px;
     padding-left: 4px;
     padding-right: 4px;
-    
-    
 }
+.input-div{
+    width:100%;
+    height: 35px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.Token-text {
+  background-color: grey;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  display: inline-block;
+  cursor: pointer;
+}
+
 .input-question{
   display: flex;
+  
   margin: 10px;
 }
 
@@ -90,11 +104,11 @@ select{
 }
 .btn{
     display: flex;
-    align-items: end;
+    /* align-items: end; */
     justify-self: end;
 }
 button{
-    align-items: end;
+    /* align-items: end; */
     justify-content: end;
 }
 /* nav section */
@@ -109,34 +123,34 @@ button{
 }
 
 .navigate--links{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .navigate--links > a{
-    text-transform: uppercase;
-    margin-left: 1.5rem;
-    text-decoration: none;
-    color: #3fd28b;
+  text-transform: uppercase;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  color: #3fd28b;
 }
 
 /* Bottom-nav section */
 .main--section{
-    display: flex;
-    padding: 0.5% 1%;
-    background-color: #3c4e62;
-    align-items: center;
+  display: flex;
+  padding: 0.5% 1%;
+  background-color: #3c4e62;
+  align-items: center;
 }
 
 .box{
-    flex:1;
-    display: flex;
-    justify-content: center;
+  flex:1;
+  display: flex;
+  justify-content: center;
 }
 
 .title{
-    color: white;
+  color: white;
 }
 
 .box:first-child > div { margin-right: auto; }
@@ -144,12 +158,12 @@ button{
 .box:last-child  > div { margin-left: auto; }
 
 .buttons > button{
-    margin-right: 1rem;
-    background-color: #3fd28b;
-    color: black;
-    border: none;
-    padding: 0.3rem 1rem;
-    font-size: 1rem;
+  margin-right: 1rem;
+  background-color: #3fd28b;
+  color: black;
+  border: none;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
 }
 
 

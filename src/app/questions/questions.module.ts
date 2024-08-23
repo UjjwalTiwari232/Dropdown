@@ -7,7 +7,7 @@ import { OptionModule } from '../option/option.module';
 import { CoreModule } from '../shared/core.module';
 import { TokenModule } from '../token/token.module';
 import { AddCorrectOptionsModule } from '../add-correct-options/add-correct-options.module';
-
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import { AddCorrectOptionsModule } from '../add-correct-options/add-correct-opti
     FormsModule,
     OptionModule,
     TokenModule,
+    MatIconModule,
     AddCorrectOptionsModule,
     CoreModule,
     QuestionsRoutingModule
