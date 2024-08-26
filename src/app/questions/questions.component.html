@@ -59,13 +59,35 @@
       <button (click)="addText()">Add Text</button>
     </div>
     <!-- <p [innerHTML]="questionString"></p> -->
-    <div class="input-question"  (mouseover)="showButton = true" (mouseleave)="showButton = false"  >
+    <!-- <div class="input-question"   >
       
-      <div #input   [innerHTML]="questionString" contenteditable="true" type="text" placeholder="Enter Question" class="input-div" ></div>
+      <p #input   [innerHTML]="questionString" contenteditable="true" type="text" placeholder="Enter Question" class="input-div" (focus)="onFocus()" (blur)="onBlur()"
+      ></p>
+      <div >
+        <button (focus)="onFocusButton()" (focus)="onFocus()" mat-icon-button *ngIf="isFocused"  (click)="addText()" class="btn-insertToken"   ><mat-icon>Close</mat-icon></button>
+      </div>
+    </div> -->
+    <div class="input-question">
+      <p #input 
+         [innerHTML]="questionString" 
+         contenteditable="true" 
+         (focus)="onFocus()" 
+         (blur)="onBlur()"
+         class="input-div"
+         tabindex="0">
+      </p>
       <div>
-        <button mat-icon-button *ngIf = "showButton" (click)="addText()"><mat-icon>Close</mat-icon></button>
+        <button 
+          mat-icon-button 
+          *ngIf="isFocused" 
+          (click)="addText()" 
+          (mousedown)="onFocusButton()"
+          class="btn-insertToken">
+          <mat-icon>Close</mat-icon>
+        </button>
       </div>
     </div>
+    
     <br />
     <br />
     <div class="btn">
