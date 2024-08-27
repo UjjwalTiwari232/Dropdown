@@ -10,10 +10,12 @@ export interface IQuestions{
 
 export interface IOption{
     id:number;
+    
     option:string;
     isCorrect:boolean;
 }
 export interface IToken{
     id:number;
+    pos:number;
     optionList:IOption[];
 }

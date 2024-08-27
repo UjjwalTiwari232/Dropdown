@@ -1,18 +1,42 @@
-*{  
+* {
 
   margin: 0;
   padding: 0;
-  
-}
-.body{
-    background-color: #EEEEEE;
-    
+
 }
 
-.main-container{
+.body {
+  background-color: #EEEEEE;
+  
+  border-top: 1px solid black;
+}
+
+.topHr{
+  width: 50rem;
+  height: 0px;
+ margin-right: 10px;
+ margin-left: 10px;
+}
+
+.topBanner {
+ 
   display: flex;
-  margin-left: 40px;
-  margin-right: 40px;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 150px 20px 150px;
+  background-color: white;
+  padding: 10px;
+
+}
+
+.topBanner:hover {
+  cursor: pointer;
+}
+
+.main-container {
+  display: flex;
+  margin-left: 150px;
+  margin-right: 150px;
   justify-content: center;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -22,37 +46,44 @@
   padding: 4px;
 }
 
-input{
-    width:100%;
-    height: 35px;
-    padding-left: 4px;
-    padding-right: 4px;
+input {
+  width: 100%;
+  height: 35px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
-.input-div{
-    width:100%;
-    height: fit-content;
-    padding-left: 4px;
-    padding-right: 4px;
-    border-bottom: 1px solid #3c4e62;
-    padding-top:8px ;
-    padding-bottom:8px ;
-    position: relative;
+
+.input-div {
+  width: 100%;
+  height: fit-content;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-bottom: 1px solid #3c4e62;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+p:empty:not(:focus)::before {
+  content: attr(data-placeholder);
 }
 
 .btn-insertToken {
 
   border: 1px solid #ccc;
   padding: 5px;
-  z-index: 1; 
+  z-index: 1;
   position: absolute;
   top: -46px;
+  width: 200px;
   left: 80px;
 }
-.input-question{
+
+.input-question {
   display: flex;
   position: relative;
   margin: 10px;
- 
+
 }
 
 .tokens {
@@ -77,8 +108,9 @@ input{
   background-color: #F3FBFF;
   padding: 20px;
 }
-.addCorrectOptions-dropDown{
-  
+
+.addCorrectOptions-dropDown {
+
   margin-bottom: 20px;
 }
 
@@ -99,42 +131,46 @@ button:hover {
   background-color: #4dbc87;
 }
 
-label{
-    width: 20%;
-    
-}
-select{
-    width: 20%;
-    padding-left:4px ;
-    padding-right: 4px;
-}
-.btn{
-    display: flex;
-    /* align-items: end; */
-    justify-self: end;
-}
-button{
-    /* align-items: end; */
-    justify-content: end;
-}
-/* nav section */
-.nav--section{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.5% 1.5%;
-    background-color:  #0B0B45;
-    align-items: center;
-    background-image:url('./../../assets/images/nav-bg.png');
+label {
+  width: 20%;
+
 }
 
-.navigate--links{
+select {
+  width: 20%;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.btn {
+  display: flex;
+  /* align-items: end; */
+  justify-self: end;
+}
+
+button {
+  /* align-items: end; */
+  justify-content: end;
+}
+
+/* nav section */
+.nav--section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5% 1.5%;
+  background-color: #0B0B45;
+  align-items: center;
+  background-image: url('./../../assets/images/nav-bg.png');
+}
+
+.navigate--links {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.navigate--links > a{
+.navigate--links>a {
   text-transform: uppercase;
   margin-left: 1.5rem;
   text-decoration: none;
@@ -142,28 +178,32 @@ button{
 }
 
 /* Bottom-nav section */
-.main--section{
+.main--section {
   display: flex;
   padding: 0.5% 1%;
   background-color: #3c4e62;
   align-items: center;
 }
 
-.box{
-  flex:1;
+.box {
+  flex: 1;
   display: flex;
   justify-content: center;
 }
 
-.title{
+.title {
   color: white;
 }
 
-.box:first-child > div { margin-right: auto; }
+.box:first-child>div {
+  margin-right: auto;
+}
 
-.box:last-child  > div { margin-left: auto; }
+.box:last-child>div {
+  margin-left: auto;
+}
 
-.buttons > button{
+.buttons>button {
   margin-right: 1rem;
   background-color: #3fd28b;
   color: black;
@@ -171,5 +211,3 @@ button{
   padding: 0.3rem 1rem;
   font-size: 1rem;
 }
-
-

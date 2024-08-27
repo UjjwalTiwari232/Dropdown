@@ -2,6 +2,10 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { IOption, IQuestions, IToken } from '../shared/interface';
 import { AppService } from '../shared/DataService';
 import { verifyHostBindings } from '@angular/compiler';
+import { event } from 'jquery';
+import { elementAt } from 'rxjs';
+import { _countGroupLabelsBeforeOption } from '@angular/material/core';
+import { NonNullableFormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -15,24 +19,16 @@ export class QuestionsComponent implements OnInit {
   
   optionsList: IOption[] = [];
   questionString: string = 'Enter the Question';
-  TokenList:IToken[] = [{
-    id: 1,
-    optionList: [{
-      id:  1,
-      option: '',
-      isCorrect: false
-    },{
-      id: 2,
-      option: '',
-      isCorrect: false
-    }]
-  }];
+  TokenElement:number[] = [];
+  TokenList:IToken[] = [];
   isFocused :boolean = false;
   isFocusedButton :boolean = false;
   correctOptionsCount = 1;
+  daalnakuch? : HTMLElement; 
   @ViewChild('input')input!: ElementRef;
+  @ViewChild('data-id')span!: ElementRef;
   @Input() token!: IToken;
-
+  // editor: EditorC;
   constructor(private appService: AppService) {}
 
   ngOnInit(): void {
@@ -57,9 +53,10 @@ export class QuestionsComponent implements OnInit {
       }
     }, 0);
   }
-  addToken() {
+  addToken(pos:number) {
     const newToken: IToken = {
       id: this.TokenList.length + 1,
+      pos:pos,
       optionList: [{
         id:  1,
         option: '',
@@ -103,10 +100,10 @@ export class QuestionsComponent implements OnInit {
 
 
 
-  // ngAfterViewInit() {
-  //   // Attach the keydown listener to handle backspace
-  //   this.input.nativeElement.addEventListener('keydown', this.handleKeydown.bind(this));
-  // }
+  ngAfterViewInit() {
+    // Attach the keydown listener to handle backspace
+    this.input.nativeElement.addEventListener('keydown', this.handleKeydown.bind(this));
+  }
 
  
   
@@ -129,7 +126,13 @@ export class QuestionsComponent implements OnInit {
   
     // Make the span non-editable
     span.setAttribute('contenteditable', 'false');
-  
+    
+     // Add identifier to the span
+    const currentToken = this.TokenList.length + 1;
+    span.setAttribute('data-id', currentToken.toString());
+
+    // this.TokenElement.push(currentToken.id);
+
     // inserting the Token 
     range.deleteContents(); // if any text selected Removing that  
     range.insertNode(span);
@@ -141,30 +144,113 @@ export class QuestionsComponent implements OnInit {
     // final updation
     sel.removeAllRanges();
     sel.addRange(range);
+
+    const paragraph = this.input.nativeElement as HTMLElement;
+    this.daalnakuch = paragraph;
+    // this.daalnakuch.
+    console.log("out",this.daalnakuch);
+    
+    this.addToken(this.getCursorPosition());
+  }
+   // Method to get the cursor position
+   getCursorPosition(): number {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return 0;
+
+    const range = selection.getRangeAt(0);
+    const { startOffset, endOffset } = range;
+    const startContainer = range.startContainer as HTMLElement;
+
+    const cursorPosition = {
+      startContainer,
+      startOffset,
+      endOffset
+    };
+
+    console.log('Cursor Position:', cursorPosition);
+    return startOffset;
+  }
+  handleKeydown(event: KeyboardEvent) {
+    if (event.key === 'Backspace') {
+      // public getCursorPosition() {
+        // const cursorPosition = this.input.nativeElement.;
+      // }
+      const sel = window.getSelection();
+      if (!sel || sel.rangeCount === 0) return;
+      
+      const range = sel.getRangeAt(0);
+      const startContainer = range.startContainer;
+  
+      const findClosestTokenInParagraph = (paragraph: HTMLElement): HTMLElement | null => {
+        console.log("test",paragraph,this.getCursorPosition() ,paragraph.children.length);
+        if(paragraph.children.length<=0) return null;
+        let cnt:number = 0;
+        let child =null;
+        console.log("para: ",paragraph.innerHTML);
+        let temp = paragraph.children;
+        for(let i = 0;i<temp.length-1;i++){
+          let id:number = parseInt( temp[i].getAttribute('data-id')!)
+          console.log("count",cnt,"id",id,"children",paragraph);
+          if(cnt+1 !== id){
+            child = temp[i]
+            break
+          }
+          else{
+            cnt += 1;
+
+          }
+         
+        }
+        // console.log(child);
+        const element = child as HTMLElement;
+        console.log(element);
+        // console.log(this.daalnakuch);
+        
+        if (element.tagName === 'SPAN' && element.hasAttribute('data-id')) {
+          
+          return element;
+        }
+     
+  
+        return null;
+      };
+  
+      // Find the paragraph element containing the selection
+      const paragraph = this.input.nativeElement as HTMLElement;
+      console.log("new",paragraph,"prev",this.daalnakuch);
+      
+      // Find the closest token element within the paragraph
+      const tokenElement = findClosestTokenInParagraph(paragraph);
+      console.log(tokenElement);
+      
+      if (tokenElement) {
+        const tokenId = parseInt(tokenElement.getAttribute('data-id')!, 10);
+        console.log("id that we are getting",tokenId);
+        
+  
+        // Remove the token from TokenList
+        this.TokenList = this.TokenList.filter(token => token.id !== tokenId);
+        //reset the id's for better UI
+        this.TokenList.forEach((value, index) => {
+          value.id = index + 1;
+        });
+        for(let i = 0;i<paragraph.children.length;i++){
+          
+          paragraph.children[i].setAttribute('data-id', i.toString());
+          
+        }
+        // Remove the element from the DOM
+        tokenElement.remove();
+  
+        // Prevent default Backspace behavior
+        event.preventDefault();
+  
+        console.log(`Token with ID ${tokenId} removed from list`);
+        
+      }
+    }
   }
   
-
-  // handleKeydown(event: KeyboardEvent) {
-  //   if (event.key === 'Backspace') {
-  //     const sel = window.getSelection();
-  //     if (!sel || sel.rangeCount === 0) return;
-
-  //     const range = sel.getRangeAt(0);
-  //     const startNode = range.startContainer;
-  //     const parentElement = startNode.nodeType === Node.TEXT_NODE ? startNode.parentNode as HTMLElement : startNode as HTMLElement;
-
-  //     // Handle backspace at the beginning of a Token-text span
-  //     if (parentElement && parentElement.classList.contains('Token-text') && range.startOffset === 0) {
-  //       parentElement.remove();
-  //       event.preventDefault(); // Prevent default backspace action
-  //     } else {
-  //       // Handle cursor directly before or at the end of a Token-text span
-  //       const previousNode = range.startContainer.previousSibling as HTMLElement;
-  //       if (previousNode && previousNode.classList.contains('Token-text')) {
-  //         previousNode.remove();
-  //         event.preventDefault(); // Prevent default backspace action
-  //       }
-  //     }
-  //   }
-  // }
+  
+  
 }

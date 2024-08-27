@@ -54,28 +54,34 @@
 
 
 <div class="body">
-  <div class="main-container">
-    <div class="btn">
-      <button (click)="addText()">Add Text</button>
+  <div class="topBanner">
+    <div class="banner" routerLink="/">
+        <button class="btnBanner">1</button>
+        <span>Question Properties</span>
     </div>
-    <!-- <p [innerHTML]="questionString"></p> -->
-    <!-- <div class="input-question"   >
-      
-      <p #input   [innerHTML]="questionString" contenteditable="true" type="text" placeholder="Enter Question" class="input-div" (focus)="onFocus()" (blur)="onBlur()"
-      ></p>
-      <div >
-        <button (focus)="onFocusButton()" (focus)="onFocus()" mat-icon-button *ngIf="isFocused"  (click)="addText()" class="btn-insertToken"   ><mat-icon>Close</mat-icon></button>
-      </div>
+    <hr class="topHr">
+    <div class="banner" routerLink="/test">
+        <button class="btnBannner">2</button>
+        <span>Question Content</span>
+    </div>
+  </div>
+  
+
+  <div class="main-container">
+    <!-- <div class="btn">
+      <button (click)="addText()">Add Text</button>
     </div> -->
     <div class="input-question">
       <p #input 
-         [innerHTML]="questionString" 
+        data-placeholder="Insert Question here..."
+         
          contenteditable="true" 
          (focus)="onFocus()" 
          (blur)="onBlur()"
          class="input-div"
          tabindex="0">
       </p>
+      
       <div>
         <button 
           mat-icon-button 
@@ -83,16 +89,16 @@
           (click)="addText()" 
           (mousedown)="onFocusButton()"
           class="btn-insertToken">
-          <mat-icon>Close</mat-icon>
+          <mat-icon>Close  </mat-icon>
         </button>
       </div>
     </div>
     
     <br />
     <br />
-    <div class="btn">
+    <!-- <div class="btn">
       <button (click)="addToken()">Add Another Token</button>
-    </div>
+    </div> -->
     <br />
     <div class="tokens" *ngFor="let i of TokenList" >
       <app-token [token] = "i" (changesInToken)="updateTheList($event)"></app-token>
