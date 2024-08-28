@@ -10,7 +10,36 @@
   
   border-top: 1px solid black;
 }
+/*                                        savePreviewSection                                      */
+.savePreviewSection{
+  margin: 15px 150px 10px 150px;
+  display: flex;
+  justify-content: space-between;
+  }
+.headerTopheading{
+  font-size: 20px;
+  color: #222222;
+  }
+.htr{
+  margin-left: 20px;
+  }
+.topBtn{
+  margin: 10px;
+  margin-right: 0px;
+  padding: 10px;
+  background: #E2F8FE 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #00000029;
+  border: 1px solid #7994B3;
+  border-radius: 2px;
+  opacity: 1;
+  color: black;
+  }
 
+.topHeading{
+  margin-top: 20px;
+  }
+
+/*                                         Question Properties                                    */
 .topHr{
   width: 50rem;
   height: 0px;
@@ -23,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px 150px 20px 150px;
+  margin: 0px 150px 20px 150px;
   background-color: white;
   padding: 10px;
 
@@ -32,6 +61,14 @@
 .topBanner:hover {
   cursor: pointer;
 }
+
+.btnBanner{
+  width: 35px;
+  height: 35px;
+  border-radius: 15px;
+  margin-right: 4px;
+}
+
 
 .main-container {
   display: flex;

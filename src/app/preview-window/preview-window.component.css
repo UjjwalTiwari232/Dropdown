@@ -1,0 +1,45 @@
+*{
+    font-family: QuickSand;
+}
+.header{
+    display: flex;
+    height: 48px;
+    background-color: #FECA56;
+    justify-content: space-between;
+}
+
+.phr{
+    display: flex;
+    width: 30%;
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.vertical {
+    border-left: 2px solid black;
+    height: 12px;
+    opacity: 0.2;
+    margin: 5px 20px;
+}
+
+
+.btn{
+    color: #222222;
+    font-weight: 700;
+    width: 112px;
+    height: 36px;
+    background: transparent linear-gradient(0deg, #57B9FE 0%, #61E8FF 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 5px #0000003D;
+    font-size: 12px;
+    border-radius: 18px;
+}
+.exitBtn{
+    margin: 5px;
+    margin-right: 30px;
+}
+
+
+.checkBtn{
+    margin-top: 20px;
+    margin-bottom: 300px;
+}

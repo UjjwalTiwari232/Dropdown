@@ -8,11 +8,12 @@ import { CoreModule } from '../shared/core.module';
 import { TokenModule } from '../token/token.module';
 import { AddCorrectOptionsModule } from '../add-correct-options/add-correct-options.module';
 import { MatIconModule } from '@angular/material/icon';
+import { HeaderModule } from '../common-components/header/header.module';
 
 
 @NgModule({
   declarations: [
-    QuestionsComponent
+    QuestionsComponent,
   ],
   imports: [
     CommonModule,
@@ -21,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     TokenModule,
     MatIconModule,
     AddCorrectOptionsModule,
+    HeaderModule,
     CoreModule,
     QuestionsRoutingModule
   ],

@@ -14,22 +14,22 @@ import { NonNullableFormBuilder } from '@angular/forms';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
-  
+
   questionsList: IQuestions[] = [];
-  
+
   optionsList: IOption[] = [];
   questionString: string = 'Enter the Question';
-  TokenElement:number[] = [];
-  TokenList:IToken[] = [];
-  isFocused :boolean = false;
-  isFocusedButton :boolean = false;
+  TokenElement: number[] = [];
+  TokenList: IToken[] = [];
+  isFocused: boolean = false;
+  isFocusedButton: boolean = false;
   correctOptionsCount = 1;
-  daalnakuch? : HTMLElement; 
-  @ViewChild('input')input!: ElementRef;
-  @ViewChild('data-id')span!: ElementRef;
+  daalnakuch?: HTMLElement[];
+  @ViewChild('input') input!: ElementRef;
+  @ViewChild('data-id') span!: ElementRef;
   @Input() token!: IToken;
   // editor: EditorC;
-  constructor(private appService: AppService) {}
+  constructor(private appService: AppService) { }
 
   ngOnInit(): void {
     console.log("Questions OnInit Called");
@@ -37,8 +37,8 @@ export class QuestionsComponent implements OnInit {
 
   onFocus() {
     this.isFocused = true;
-    this.isFocusedButton = false; 
- 
+    this.isFocusedButton = false;
+
   }
 
   onFocusButton() {
@@ -53,46 +53,46 @@ export class QuestionsComponent implements OnInit {
       }
     }, 0);
   }
-  addToken(pos:number) {
+  addToken() {
     const newToken: IToken = {
       id: this.TokenList.length + 1,
-      pos:pos,
+      pos: this.TokenList.length + 1,
       optionList: [{
-        id:  1,
+        id: 1,
         option: '',
         isCorrect: false
-      },{
+      }, {
         id: 2,
         option: '',
         isCorrect: false
       }]
     };
-    
+
     this.TokenList.push(newToken);
     console.log(this.TokenList.length);
   }
 
-  addOptions(id:number) {
-    
+  addOptions(id: number) {
+
     const newOption: IOption = {
       id: this.optionsList.length + 1,
       option: '',
       isCorrect: false
     };
-    this.TokenList.forEach((value, index) =>{
-      if(value.id == id){
+    this.TokenList.forEach((value, index) => {
+      if (value.id == id) {
         value.optionList.push(newOption);
       }
     })
-    
+
   }
 
 
-  updateTheList(updatedToken:IToken){
-    this.TokenList.forEach( (value,index) =>{
-      if(value.id === updatedToken.id){
+  updateTheList(updatedToken: IToken) {
+    this.TokenList.forEach((value, index) => {
+      if (value.id === updatedToken.id) {
         value.optionList = updatedToken.optionList;
-        console.log("Token",updatedToken.id,"is updated and has OptionList length of",value.optionList);
+        console.log("Token", updatedToken.id, "is updated and has OptionList length of", value.optionList);
       }
     });
   }
@@ -105,14 +105,14 @@ export class QuestionsComponent implements OnInit {
     this.input.nativeElement.addEventListener('keydown', this.handleKeydown.bind(this));
   }
 
- 
-  
+
+
   addText() {
     const el = this.input.nativeElement;
     const sel = window.getSelection();
-  
+
     if (!sel || sel.rangeCount === 0) return;
-  
+
     const range = sel.getRangeAt(0);
     console.log(el.innerHTML);
     // Create the new span element with non-editable styles
@@ -123,11 +123,11 @@ export class QuestionsComponent implements OnInit {
     span.style.margin = '2px';
     span.style.cursor = 'pointer';
     span.textContent = 'Token';
-  
+
     // Make the span non-editable
     span.setAttribute('contenteditable', 'false');
-    
-     // Add identifier to the span
+
+    // Add identifier to the span
     const currentToken = this.TokenList.length + 1;
     span.setAttribute('data-id', currentToken.toString());
 
@@ -136,121 +136,100 @@ export class QuestionsComponent implements OnInit {
     // inserting the Token 
     range.deleteContents(); // if any text selected Removing that  
     range.insertNode(span);
-  
+
     // moving the cursor to the end of the newly inserted Token
     range.setStartAfter(span);
     range.collapse(true);
-  
+
     // final updation
     sel.removeAllRanges();
     sel.addRange(range);
 
     const paragraph = this.input.nativeElement as HTMLElement;
-    this.daalnakuch = paragraph;
+    this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
     // this.daalnakuch.
-    console.log("out",this.daalnakuch);
-    
-    this.addToken(this.getCursorPosition());
+    console.log("out", this.daalnakuch);
+
+    this.addToken();
   }
-   // Method to get the cursor position
-   getCursorPosition(): number {
-    const selection = window.getSelection();
-    if (!selection || selection.rangeCount === 0) return 0;
+  
 
-    const range = selection.getRangeAt(0);
-    const { startOffset, endOffset } = range;
-    const startContainer = range.startContainer as HTMLElement;
-
-    const cursorPosition = {
-      startContainer,
-      startOffset,
-      endOffset
-    };
-
-    console.log('Cursor Position:', cursorPosition);
-    return startOffset;
-  }
   handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Backspace') {
-      // public getCursorPosition() {
-        // const cursorPosition = this.input.nativeElement.;
-      // }
       const sel = window.getSelection();
       if (!sel || sel.rangeCount === 0) return;
-      
+
       const range = sel.getRangeAt(0);
       const startContainer = range.startContainer;
-  
-      const findClosestTokenInParagraph = (paragraph: HTMLElement): HTMLElement | null => {
-        console.log("test",paragraph,this.getCursorPosition() ,paragraph.children.length);
-        if(paragraph.children.length<=0) return null;
-        let cnt:number = 0;
-        let child =null;
-        console.log("para: ",paragraph.innerHTML);
-        let temp = paragraph.children;
-        for(let i = 0;i<temp.length-1;i++){
-          let id:number = parseInt( temp[i].getAttribute('data-id')!)
-          console.log("count",cnt,"id",id,"children",paragraph);
-          if(cnt+1 !== id){
-            child = temp[i]
-            break
-          }
-          else{
-            cnt += 1;
+      const findClosestTokenInParagraph = (paragraph: HTMLElement): number | null => {
 
+        console.log("test", paragraph, paragraph.children);
+        console.log("before timeout: ", this.daalnakuch![this.daalnakuch!.length-1].getAttribute('data-id')!);
+        let deletedArray = paragraph.children;
+        let originalArray = this.daalnakuch;
+        // console.log("yoooooooooooo",deletedArray,originalArray)
+        for(let i=0;i<originalArray!.length;i++){
+          let notFound = true;
+          for(let j=0;j<deletedArray.length;j++){
+            // console.log("yoooooooooooo",deletedArray[j].getAttribute('data-id') , originalArray![i].getAttribute('data-id'));
+            if(deletedArray[j].getAttribute('data-id') === originalArray![i].getAttribute('data-id')){
+              notFound = false;
+              // console.log("insideLoop",deletedArray[j].getAttribute('data-id') , originalArray![i].getAttribute('data-id'));
+              break;
+            }
           }
-         
+          if(notFound) return parseInt(originalArray![i].getAttribute('data-id')!);
         }
-        // console.log(child);
-        const element = child as HTMLElement;
-        console.log(element);
-        // console.log(this.daalnakuch);
-        
-        if (element.tagName === 'SPAN' && element.hasAttribute('data-id')) {
-          
-          return element;
-        }
-     
-  
+
         return null;
+
       };
-  
+
       // Find the paragraph element containing the selection
       const paragraph = this.input.nativeElement as HTMLElement;
-      console.log("new",paragraph,"prev",this.daalnakuch);
-      
-      // Find the closest token element within the paragraph
-      const tokenElement = findClosestTokenInParagraph(paragraph);
-      console.log(tokenElement);
-      
-      if (tokenElement) {
-        const tokenId = parseInt(tokenElement.getAttribute('data-id')!, 10);
-        console.log("id that we are getting",tokenId);
-        
-  
-        // Remove the token from TokenList
-        this.TokenList = this.TokenList.filter(token => token.id !== tokenId);
-        //reset the id's for better UI
-        this.TokenList.forEach((value, index) => {
-          value.id = index + 1;
-        });
-        for(let i = 0;i<paragraph.children.length;i++){
+      // const beforeTImeout = [...paragraph.children];
+      setTimeout(() => {
+        // Find the closest token element within the paragraph
+        const tokenId = findClosestTokenInParagraph(paragraph);
+        console.log(tokenId);
+        if (tokenId) {
+          // const tokenId = parseInt(tokenElement.getAttribute('data-id')!);
+          console.log("id that we are getting", tokenId);
+
+
+          // Remove the token from TokenList
+          // console.log(this.TokenList);
           
-          paragraph.children[i].setAttribute('data-id', i.toString());
-          
+          this.TokenList = this.TokenList.filter(token => token.id !== tokenId);
+          //reset the id's for better UI
+          this.TokenList.forEach((value, index) => {
+            value.pos = index + 1;
+          });
+          const paragraph = this.input.nativeElement as HTMLElement;
+          this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
+          // for(let i = 0;i<paragraph.children.length;i++){
+
+          //   paragraph.children[i].setAttribute('data-id', i.toString()+1);
+
+          // }
+          // Remove the element from the DOM
+          // tokenElement.remove();
+
+          // Prevent default Backspace behavior
+          event.preventDefault();
+
+          console.log(`Token with ID ${tokenId} removed from list`);
+
         }
-        // Remove the element from the DOM
-        tokenElement.remove();
-  
-        // Prevent default Backspace behavior
-        event.preventDefault();
-  
-        console.log(`Token with ID ${tokenId} removed from list`);
-        
-      }
+      },)
+
     }
   }
-  
-  
-  
+
+  saveData(){
+    const paragraph = this.input.nativeElement as HTMLElement;
+    console.log(paragraph)
+    this.appService.setTokenList(this.TokenList,paragraph);
+  }
+
 }

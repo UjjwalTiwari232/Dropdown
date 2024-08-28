@@ -1,26 +1,4 @@
-
-  <nav class="nav--section">
-    <div>
-        <img src="./../../assets/images/logo.svg" alt="Logo">
-    </div>
-    <div class="navigate--links">
-        <a href="#">Content</a>
-        <a href="#">Users</a>
-        <a href="#">Manage Site</a>
-        <!-- <a href="#">
-            <img src="assets/icons/alerts.svg" alt="">
-        </a> -->
-        <a href="#">
-            <img src="./../../assets/images/alerts.svg" alt="Alerts">
-        </a>
-        <a href="#">
-            <img src="./../../assets/images/announcements.svg" alt="Announcements">
-        </a>
-        <a href="#">
-            <img src="./../../assets/images/account_circle.svg" alt="">
-        </a>
-    </div>
-  </nav>
+<app-header></app-header>
   
 
 
@@ -54,14 +32,26 @@
 
 
 <div class="body">
+
+  <div class="savePreviewSection">
+    <div class="topHeading">
+        <span class="headerTopheading">Matching</span>
+        <span class="topL hthr">(Locked)</span>
+    </div>
+    <div class="buttonDiv">
+        <button class="topBtn">Unlock</button>
+        <button class="topBtn" routerLink="/preview" (click)="saveData()">Save and Preview</button>
+    </div>
+  </div>
+
   <div class="topBanner">
     <div class="banner" routerLink="/">
         <button class="btnBanner">1</button>
         <span>Question Properties</span>
     </div>
     <hr class="topHr">
-    <div class="banner" routerLink="/test">
-        <button class="btnBannner">2</button>
+    <div class="banner" routerLink="/questions">
+        <button class="btnBanner">2</button>
         <span>Question Content</span>
     </div>
   </div>

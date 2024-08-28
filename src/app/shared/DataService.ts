@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IOption, IQuestions } from './interface';
+import { IOption, IQuestions, IToken } from './interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,21 @@ export class AppService {
 
     constructor() {
         this.optionsSubject.next(this.optionsList); // Initialize subject with current options list
+    }
+
+    private TokenList:IToken[] = [];
+    private question!:HTMLElement
+
+    setTokenList(val:IToken[],val1:HTMLElement):void {
+        this.TokenList = val;
+        this.question = val1;
+    }
+
+    getQuestionElement():HTMLElement{
+        return this.question;
+    }
+    getTokenList():IToken[]{
+        return [...this.TokenList];
     }
 
     getQuestions(): IQuestions[] {
