@@ -1,17 +1,24 @@
 .setProperty {
     display: flex;
     align-items: center;
+    /* flex-direction: column; */
     gap: 10px; /* Adjust spacing between elements as needed */
 }
 
-.setProperty p {
-    margin: 0; /* Remove default margin */
+#setProperty-container p {
+    margin: 4px 5px 0px 5px;
+}
+
+#setProperty-main{
+    display: flex;
+    flex-direction: column;
 }
 
 #setProperty-container {
     display: flex;
-    flex-direction: column;
-    position: relative;
+    flex-direction: row;
+    
+    padding: 8px;
 }
 
 #setProperty-container select {
@@ -20,21 +27,20 @@
     box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-#setProperty-container label {
+.setProperty label {
     color: red;
     font-size: 12px;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 5px;
-    display: none; /* Hidden by default */
+    margin-top: 2px;
+    margin-bottom: 10px;
+    margin-left: 75px;
 }
+
 
 #setProperty-container .has-error select {
     border: 1px solid red;
 }
 
-#setProperty-container .has-error label {
+#setProperty-container .has-error  {
     display: block; /* Show error message if there's an error */
 }
 

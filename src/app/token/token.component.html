@@ -1,5 +1,5 @@
 <div class="options" *ngFor="let i of token.optionList" >
-    <app-option class="app-option" [option]="i" (changesInOptionList)="updateTheList($event)" [optionList]="token.optionList" ></app-option>
+    <app-option class="app-option" *ngIf="i.id!=1" [option]="i" (changesInOptionList)="updateTheList($event)" [optionList]="token.optionList" ></app-option>
 
 </div>
 <div class="btn">

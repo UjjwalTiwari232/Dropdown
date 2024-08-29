@@ -66,15 +66,22 @@ export class AddCorrectOptionsComponent implements OnChanges {
     const selectedOption = event.target.options[event.target.selectedIndex].value;
     console.log("Selected Option Object", selectedOption,event.target.selectedIndex);
     let targetIndex = event.target.selectedIndex + 1;
-    this.token.optionList.forEach( (value,index) => {
-      if(value.isCorrect && value.id !== targetIndex){
-        value.isCorrect = false;
-      }
-      else if(value.id === targetIndex ){
-        value.isCorrect = true;
-      }
-    })
-    this.changesInToken.emit(this.token);
+    if(targetIndex === 1 ){
+      this.selectedOption = this.token.optionList[0].option;
+    }
+    else{
+      this.token.optionList.forEach( (value,index) => {
+        if(value.isCorrect && value.id !== targetIndex){
+          value.isCorrect = false;
+        }
+        else if(value.id === targetIndex ){
+          value.isCorrect = true;
+          this.selectedOption = this.token.optionList[index].option;
+        }
+      })
+      this.changesInToken.emit(this.token);
+
+    }
   }
   
 }

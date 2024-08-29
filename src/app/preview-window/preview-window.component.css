@@ -37,9 +37,26 @@
     margin: 5px;
     margin-right: 30px;
 }
+/*                                             div-Question                                       */
+.Question{
+    display: flex;
+    flex-direction: row;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+.Question-pos{
+    width: 97%;
+    /* margin-top: 25px; */
+    margin-right: 25px;
+}
 
-
+.Question-id{
+    width: 3%;
+    /* margin-right: 8px; */
+}
+/*                                                       CheckButton                                 */
 .checkBtn{
     margin-top: 20px;
-    margin-bottom: 300px;
+    margin-left: 55px;
 }
+

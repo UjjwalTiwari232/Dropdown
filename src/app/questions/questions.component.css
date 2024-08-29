@@ -96,9 +96,10 @@ input {
   padding-left: 4px;
   padding-right: 4px;
   border-bottom: 1px solid #3c4e62;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 4px;
+  /* padding-bottom: 4px; */
   position: relative;
+  line-height: 35px;
 }
 
 p:empty:not(:focus)::before {
@@ -123,6 +124,11 @@ p:empty:not(:focus)::before {
 
 }
 
+/*                        */
+.disabled-class{
+  opacity: 0.5;
+  
+}
 .tokens {
   display: flex;
   flex-direction: column;
@@ -148,7 +154,7 @@ p:empty:not(:focus)::before {
 
 .addCorrectOptions-dropDown {
 
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .btn {

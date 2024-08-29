@@ -1,13 +1,17 @@
 <div class="setProperty">
-  <p>Token {{ token.pos }} </p>
-  <div id="setProperty-container">
+  
+  <div id="setProperty-main">
     <!-- Bind the change event to the onOptionChange method -->
-    <select id="token" (change)="onOptionChange($event)">
-      <!-- Bind value to the object -->
-      <option *ngFor="let option of token.optionList" [ngValue]="option">{{ option.option }}</option>
-    </select>
+     <div id="setProperty-container">
+      <p>Token {{ token.pos }} </p>
+       <select id="token" (change)="onOptionChange($event)">
+         <!-- Bind value to the object -->
+         <option *ngFor="let option of token.optionList" [ngValue]="option">{{ option.option }}</option>
+       </select>
+
+     </div>
+     <label *ngIf="selectedOption === 'Select'" id="error-message">Answer Option is required</label>
     <!-- Conditionally display the error message if no option is selected -->
-    <label *ngIf="!selectedOption || selectedOption === 'Select'" id="error-message">Answer Option is required</label>
   </div>
 </div>
 

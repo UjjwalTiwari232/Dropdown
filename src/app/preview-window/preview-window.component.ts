@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppService } from '../shared/DataService';
 import { IToken } from '../shared/interface';
 
@@ -9,7 +9,7 @@ import { IToken } from '../shared/interface';
 })
 export class PreviewWindowComponent implements OnInit {
   tokenList: IToken[] = [];
-  
+  @ViewChild('question') queston!:ElementRef;
   constructor(
     private appService: AppService,
     private el: ElementRef,
@@ -34,20 +34,23 @@ export class PreviewWindowComponent implements OnInit {
     const parser = new DOMParser();
     const doc = parser.parseFromString(htmlString, 'text/html');
 
+  
+
     // Select all <span> elements
     const spanElements = doc.querySelectorAll('span');
-
+    
     spanElements.forEach((span,index) => {
       // Create a <select> element
       const select = document.createElement('select');
       select.style.width = '135px';
+      select.style.margin = '0px 5px 0px 5px'
       // Add options to the <select> element
       this.tokenList[index].optionList.forEach((token,index) => {
         
         const option = document.createElement('option');
         option.textContent = "";
         if(token.option != undefined && token.option != null) {
-          option.textContent = token.option; // Assuming token.option contains the text for the option
+          option.textContent = token.option; 
           option.value = token.id.toString();
 
         }
@@ -60,8 +63,16 @@ export class PreviewWindowComponent implements OnInit {
     });
 
     // Update the view with modified HTML
-    console.log(this.el.nativeElement.children[2]);
+    console.log(this.el.nativeElement.children[2].children[1]);
     console.log(doc.body.innerHTML);
-    this.el.nativeElement.children[2].innerHTML = doc.body.innerHTML;
+    this.el.nativeElement.children[2].children[1].innerHTML += doc.body.innerHTML;
   }
+
+  checkAnswer(){
+    let val = this.queston.nativeElement
+    console.log("Question",val);
+    
+  }
+
+
 }

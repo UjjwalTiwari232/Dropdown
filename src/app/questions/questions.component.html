@@ -40,7 +40,7 @@
     </div>
     <div class="buttonDiv">
         <button class="topBtn">Unlock</button>
-        <button class="topBtn" routerLink="/preview" (click)="saveData()">Save and Preview</button>
+        <button class="topBtn" [disabled]="TokenElement.length === 0"  [ngClass]="{'disabled-class': TokenElement.length === 0}" routerLink="/preview"  (click)="saveData()">Save and Preview</button>
     </div>
   </div>
 
@@ -90,12 +90,13 @@
       <button (click)="addToken()">Add Another Token</button>
     </div> -->
     <br />
-    <div class="tokens" *ngFor="let i of TokenList" >
-      <app-token [token] = "i" (changesInToken)="updateTheList($event)"></app-token>
+    
+    <div class="tokens"  [ngClass]="{'disabled-class': TokenElement.length === 0}" *ngFor="let i of TokenList" >
+      <app-token [token] = "i" (changesInToken)="updateTheList($event)" ></app-token>
       
     </div>
     <br>
-    <div class="addCorrectOptions" >
+    <div class="addCorrectOptions" [ngClass]="{'disabled-class': TokenElement.length === 0}" >
       <div class="addCorrectOptions-dropDown" *ngFor="let i of TokenList">
         <app-add-correct-options [token]="i" (changesInToken)="updateTheList($event)"></app-add-correct-options>
       </div>

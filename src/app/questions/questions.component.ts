@@ -20,7 +20,24 @@ export class QuestionsComponent implements OnInit {
   optionsList: IOption[] = [];
   questionString: string = 'Enter the Question';
   TokenElement: number[] = [];
-  TokenList: IToken[] = [];
+  TokenList: IToken[] = [{
+    id: 1,
+    pos: 1,
+    optionList: [{
+      id: 1,
+      option: 'Select',
+      isCorrect: false
+    }, {
+      id: 2,
+      option: '',
+      isCorrect: false
+    },
+    {
+      id: 3,
+      option: '',
+      isCorrect: false
+    }
+  ]}];
   isFocused: boolean = false;
   isFocusedButton: boolean = false;
   correctOptionsCount = 1;
@@ -59,13 +76,19 @@ export class QuestionsComponent implements OnInit {
       pos: this.TokenList.length + 1,
       optionList: [{
         id: 1,
-        option: '',
+        option: 'Select',
         isCorrect: false
       }, {
         id: 2,
         option: '',
         isCorrect: false
-      }]
+      },
+      {
+        id: 3,
+        option: '',
+        isCorrect: false
+      }
+    ]
     };
 
     this.TokenList.push(newToken);
@@ -103,8 +126,173 @@ export class QuestionsComponent implements OnInit {
   ngAfterViewInit() {
     // Attach the keydown listener to handle backspace
     this.input.nativeElement.addEventListener('keydown', this.handleKeydown.bind(this));
+
+    this.input.nativeElement.addEventListener('click', this.handleClick.bind(this));
   }
 
+
+
+
+
+
+
+
+
+//   addText() {
+//     const el = this.input.nativeElement;
+//     const sel = window.getSelection();
+  
+//     if (!sel || sel.rangeCount === 0) return;
+    
+//     const range = sel.getRangeAt(0);
+    
+//     // Check if the cursor is within an element with className "input-div"
+//     if (!this.isCursorInInputDiv(range)) {
+//       console.log('Cursor is not in an element with className "input-div".');
+//       return;
+//     }
+    
+//     console.log("Range", range, sel);
+//     console.log(el.innerHTML);
+    
+//     // Create the new span element with non-clickable styles
+//     const span = document.createElement('span');
+//     span.style.backgroundColor = '#f0f0f0';
+//     span.style.border = '1px solid #ccc';
+//     span.style.padding = '2px 4px';
+//     span.style.margin = '6px';
+//     span.style.cursor = 'not-allowed';
+//     span.style.pointerEvents = 'none'; // Make the span non-clickable
+//     // span.style.userSelect ='none'
+//     span.className = 'span-token'
+//     span.textContent = 'Token';
+//     span.setAttribute('contentEditable', 'false');
+//     span.setAttribute('disabled', 'true');
+//     // span.setAttribute('tabIndex','-1');
+//     let currentToken = 0;
+    
+//     // Add identifier to the span
+//     if (this.TokenList.length === 1 && this.TokenElement.length === 0) {
+//       currentToken = this.TokenList[0].id;
+//     } else {
+//       currentToken = this.TokenList.length + 1;
+//       this.addToken();
+//     }
+    
+//     span.setAttribute('data-id', currentToken.toString());
+//     this.TokenElement.push(currentToken);
+    
+//     // Insert the Token
+//     range.deleteContents(); // Remove any selected text
+//     range.insertNode(span);
+    
+//     // Move the cursor to the end of the newly inserted Token
+//     range.setStartAfter(span);
+//     // range.collapse(true);
+    
+//     // Final update
+//     sel.removeAllRanges();
+//     sel.addRange(range);
+    
+//     const paragraph = this.input.nativeElement as HTMLElement;
+//     this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
+//     console.log("out", this.daalnakuch);
+//   }
+  
+// // Function to check if the cursor is within an element with className "input-div"
+// isCursorInInputDiv(range: Range): boolean {
+//   let container: Node | null = range.startContainer;
+
+//   while (container) {
+//     const element = container as HTMLElement;
+//     if (container.nodeType === Node.ELEMENT_NODE) {
+//       if (element.classList.contains('input-div')) {
+//         return true;
+//       }
+//     }
+//     container = element.parentElement ?? null; // Explicitly handle potential null value
+//   }
+
+//   return false;
+// }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // addText() {
+  //   const el = this.input.nativeElement;
+  //   const sel = window.getSelection();
+
+  //   if (!sel || sel.rangeCount === 0) return;
+    
+  //   const range = sel.getRangeAt(0);
+  //   // if(range.startContainer.parentElement?.className !== 'input-div') return;
+  //   console.log("Range",range,sel);
+    
+
+  //   console.log(el.innerHTML);
+  //   // Create the new span element with non-editable styles
+  //   const span = document.createElement('span');
+  //   span.style.backgroundColor = '#f0f0f0';
+  //   span.style.border = '1px solid #ccc';
+  //   span.style.padding = '2px 4px';
+  //   span.style.margin = '2px';
+  //   span.style.cursor = 'pointer';
+  //   span.textContent = 'Token';
+  //   span.className = 'span-token'
+  //   span.setAttribute('contentEditable', 'false');
+   
+  //   let currentToken = 0
+  //   // Add identifier to the span
+  //   if(this.TokenList.length === 1 && this.TokenElement.length===0){
+  //     currentToken = this.TokenList[0].id;
+
+  //   }
+  //   else{
+  //     currentToken = this.TokenList.length + 1;
+  //     this.addToken();
+  //   }
+    
+  //   span.setAttribute('data-id', currentToken.toString());
+
+  //   this.TokenElement.push(currentToken);
+
+  //   // inserting the Token 
+  //   range.deleteContents(); // if any text selected Removing that  
+  //   range.insertNode(span);
+
+ 
+    
+    
+
+  //   // moving the cursor to the end of the newly inserted Token
+  //   range.setStartAfter(span);
+    
+  //   range.collapse(true);
+
+  //   // final updation
+  //   sel.removeAllRanges();
+  //   sel.addRange(range);
+
+  //   const paragraph = this.input.nativeElement as HTMLElement;
+  //   this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
+
+    
+    
+  // }
+  
 
 
   addText() {
@@ -114,7 +302,11 @@ export class QuestionsComponent implements OnInit {
     if (!sel || sel.rangeCount === 0) return;
 
     const range = sel.getRangeAt(0);
+    // if(range.startContainer.parentElement?.className !== 'input-div') return;
+    console.log("Range", range, sel);
+
     console.log(el.innerHTML);
+
     // Create the new span element with non-editable styles
     const span = document.createElement('span');
     span.style.backgroundColor = '#f0f0f0';
@@ -123,36 +315,66 @@ export class QuestionsComponent implements OnInit {
     span.style.margin = '2px';
     span.style.cursor = 'pointer';
     span.textContent = 'Token';
+    span.className = 'span-token';
+    span.setAttribute('contentEditable', 'false');
 
-    // Make the span non-editable
-    span.setAttribute('contenteditable', 'false');
-
+    let currentToken = 0;
     // Add identifier to the span
-    const currentToken = this.TokenList.length + 1;
+    if (this.TokenList.length === 1 && this.TokenElement.length === 0) {
+        currentToken = this.TokenList[0].id;
+    } else {
+        currentToken = this.TokenList.length + 1;
+        this.addToken();
+    }
+
     span.setAttribute('data-id', currentToken.toString());
+    this.TokenElement.push(currentToken);
 
-    // this.TokenElement.push(currentToken.id);
-
-    // inserting the Token 
-    range.deleteContents(); // if any text selected Removing that  
+    // Inserting the Token
+    range.deleteContents(); // if any text selected, remove it
     range.insertNode(span);
 
-    // moving the cursor to the end of the newly inserted Token
-    range.setStartAfter(span);
+    // Create and insert a non-breaking space or a regular text node for extra space
+    const extraSpace = document.createTextNode(' '); // or use '\u00A0' for non-breaking space
+    range.insertNode(extraSpace);
+
+    // Move the cursor to the end of the newly inserted Token
+    range.setStartAfter(extraSpace);
     range.collapse(true);
 
-    // final updation
+    // Final update
     sel.removeAllRanges();
     sel.addRange(range);
 
     const paragraph = this.input.nativeElement as HTMLElement;
     this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
-    // this.daalnakuch.
-    console.log("out", this.daalnakuch);
+}
 
-    this.addToken();
-  }
+
+
+
+
+
+
+
+
+  handleClick(event:MouseEvent){
+    // console.log("click kiya lavda",event.target);
+    const target = event.target as HTMLElement; // Cast target to HTMLElement
   
+    // if (target) { // Ensure target is not null
+    //   console.log("Clicked element class name:", target.className);
+    // } else {
+    //   console.log("Clicked element is null.");
+    // }
+    if(target.className === 'span-token'){
+      this.isFocused = false;
+      this.isFocusedButton = false;  
+      
+    }
+    
+
+  }
 
   handleKeydown(event: KeyboardEvent) {
     if (event.key === 'Backspace') {
@@ -180,42 +402,45 @@ export class QuestionsComponent implements OnInit {
           }
           if(notFound) return parseInt(originalArray![i].getAttribute('data-id')!);
         }
-
         return null;
-
       };
 
       // Find the paragraph element containing the selection
       const paragraph = this.input.nativeElement as HTMLElement;
-      // const beforeTImeout = [...paragraph.children];
+
       setTimeout(() => {
-        // Find the closest token element within the paragraph
+
         const tokenId = findClosestTokenInParagraph(paragraph);
         console.log(tokenId);
         if (tokenId) {
-          // const tokenId = parseInt(tokenElement.getAttribute('data-id')!);
           console.log("id that we are getting", tokenId);
+          this.TokenElement = this.TokenElement.filter(token => token !== tokenId)
+          if(this.TokenList.length === 1){
+            this.TokenList[0].optionList = [{
+              id: 1,
+              option: 'Select',
+              isCorrect: false
+            }, {
+              id: 2,
+              option: '',
+              isCorrect: false
+            },
+            {
+              id: 3,
+              option: '',
+              isCorrect: false
+            }
+          ]
+          }else{
+            this.TokenList = this.TokenList.filter(token => token.id !== tokenId);
+  
+            this.TokenList.forEach((value, index) => {
+              value.pos = index + 1;
+            });
 
-
-          // Remove the token from TokenList
-          // console.log(this.TokenList);
-          
-          this.TokenList = this.TokenList.filter(token => token.id !== tokenId);
-          //reset the id's for better UI
-          this.TokenList.forEach((value, index) => {
-            value.pos = index + 1;
-          });
+          }
           const paragraph = this.input.nativeElement as HTMLElement;
           this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
-          // for(let i = 0;i<paragraph.children.length;i++){
-
-          //   paragraph.children[i].setAttribute('data-id', i.toString()+1);
-
-          // }
-          // Remove the element from the DOM
-          // tokenElement.remove();
-
-          // Prevent default Backspace behavior
           event.preventDefault();
 
           console.log(`Token with ID ${tokenId} removed from list`);
@@ -227,8 +452,12 @@ export class QuestionsComponent implements OnInit {
   }
 
   saveData(){
+    console.log("clicked");
     const paragraph = this.input.nativeElement as HTMLElement;
     console.log(paragraph)
+    if(this.TokenElement.length === 0 ){
+      throw alert("Add Aleast One Token")
+    }
     this.appService.setTokenList(this.TokenList,paragraph);
   }
 

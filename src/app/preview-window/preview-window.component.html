@@ -5,10 +5,16 @@
         <span class="vertical"></span>
         <p>ID: 12345678</p>
     </div>
-    <button class="btn exitBtn" routerLink="/test">EXIT PREVIEW</button>
+    <button class="btn exitBtn" routerLink="/questions">EXIT PREVIEW</button>
 </div>
-<div class="Question-pos"></div>
+<div class="Question">
+    <div class="Question-id">Q 1:</div> 
+    <div class="Question-pos" #question>
+    
+    </div>
+</div>
+
 <div class="canvasDiv">
     
-    <button class="btn checkBtn" >check</button>
+    <button class="btn checkBtn" (click)="checkAnswer()">check</button>
 </div>
