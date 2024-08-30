@@ -35,7 +35,7 @@ import { IOption, IToken } from '../shared/interface';
   styleUrls: ['./add-correct-options.component.css']
 })
 export class AddCorrectOptionsComponent implements OnChanges {
-  optionsList: string[] = ["Select"];
+  optionsList: string[] = [];
   selectedOption: string = '';
 
   @Input() token!: IToken;
@@ -65,23 +65,25 @@ export class AddCorrectOptionsComponent implements OnChanges {
   onOptionChange(event: any) {
     const selectedOption = event.target.options[event.target.selectedIndex].value;
     console.log("Selected Option Object", selectedOption,event.target.selectedIndex);
-    let targetIndex = event.target.selectedIndex + 1;
-    if(targetIndex === 1 ){
-      this.selectedOption = this.token.optionList[0].option;
-    }
-    else{
-      this.token.optionList.forEach( (value,index) => {
-        if(value.isCorrect && value.id !== targetIndex){
-          value.isCorrect = false;
-        }
-        else if(value.id === targetIndex ){
-          value.isCorrect = true;
-          this.selectedOption = this.token.optionList[index].option;
-        }
-      })
-      this.changesInToken.emit(this.token);
+    let targetIndex = event.target.selectedIndex ;
+    // if(targetIndex === 1 ){
+    //   this.selectedOption = this.token.optionList[0].option;
+    // }
+    // else{
+    console.log("TargetIndex", targetIndex);
+    
+    this.token.optionList.forEach( (value,index) => {
+      if(value.isCorrect && value.id !== targetIndex){
+        value.isCorrect = false;
+      }
+      else if(value.id === targetIndex ){
+        value.isCorrect = true;
+        this.selectedOption = this.token.optionList[index].option;
+      }
+    })
+    this.changesInToken.emit(this.token);
 
     }
-  }
+  // }
   
 }

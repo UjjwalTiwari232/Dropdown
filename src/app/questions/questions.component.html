@@ -40,7 +40,7 @@
     </div>
     <div class="buttonDiv">
         <button class="topBtn">Unlock</button>
-        <button class="topBtn" [disabled]="TokenElement.length === 0"  [ngClass]="{'disabled-class': TokenElement.length === 0}" routerLink="/preview"  (click)="saveData()">Save and Preview</button>
+        <button class="topBtn" [disabled]="checkIfCorrrectOptionAdded()"  [ngClass]="{'disabled-class': checkIfCorrrectOptionAdded()}" routerLink="/preview"  (click)="saveData()">Save and Preview</button>
     </div>
   </div>
 

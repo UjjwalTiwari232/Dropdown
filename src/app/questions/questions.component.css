@@ -10,11 +10,13 @@
   
   border-top: 1px solid black;
 }
+
 /*                                        savePreviewSection                                      */
 .savePreviewSection{
   margin: 15px 150px 10px 150px;
   display: flex;
   justify-content: space-between;
+  user-select: none;
   }
 .headerTopheading{
   font-size: 20px;
@@ -48,7 +50,7 @@
 }
 
 .topBanner {
- 
+ user-select: none;
   display: flex;
   align-items: center;
   justify-content: center;
