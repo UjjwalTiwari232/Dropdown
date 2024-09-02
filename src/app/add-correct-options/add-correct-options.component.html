@@ -6,7 +6,8 @@
       <p>Token {{ token.pos }} </p>
        <select id="token" (change)="onOptionChange($event)">
          <!-- Bind value to the object -->
-          <option selected disabled>Select</option>
+         <option default>Select</option>
+          <!-- <option selected disabled>Select</option> -->
          <option *ngFor="let option of token.optionList" [ngValue]="option">{{ option.option }}</option>
        </select>
 

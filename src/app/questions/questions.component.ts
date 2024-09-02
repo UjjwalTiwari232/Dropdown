@@ -184,9 +184,6 @@ export class QuestionsComponent implements OnInit {
     range.deleteContents(); // if any text selected, remove it
     range.insertNode(span);
 
-    // Create and insert a non-breaking space or a regular text node for extra space
-    // const extraSpace = document.createTextNode(' '); // or use '\u00A0' for non-breaking space
-    // range.insertNode(extraSpace);
 
     // Move the cursor to the end of the newly inserted Token
     range.setStartAfter(span);
@@ -222,7 +219,7 @@ checkIfCorrrectOptionAdded():boolean{
 
 
   let outList = this.TokenList;
-  console.log("list of OOOOOOOOOOOOOOOOOOOOOO", outList);
+  // console.log("list of OOOOOOOOOOOOOOOOOOOOOO", outList);
   for(let j=0;j<outList.length;j++){
     let anyoneselected = false;
     let list = outList[j].optionList;

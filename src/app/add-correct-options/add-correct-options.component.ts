@@ -46,8 +46,9 @@ export class AddCorrectOptionsComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    console.log("Hellowwwwwwwwwwwwwwwwww",changes);
     if (changes['token']) {
-      console.log("Hellowwwwwwwwwwwwwwwwww");
+     
       
       this.updateOptionsList();
     }
@@ -66,11 +67,12 @@ export class AddCorrectOptionsComponent implements OnChanges {
     const selectedOption = event.target.options[event.target.selectedIndex].value;
     console.log("Selected Option Object", selectedOption,event.target.selectedIndex);
     let targetIndex = event.target.selectedIndex ;
-    // if(targetIndex === 1 ){
-    //   this.selectedOption = this.token.optionList[0].option;
-    // }
+    if(targetIndex === 0 ){
+      this.selectedOption = 'Select';
+      
+    }
     // else{
-    console.log("TargetIndex", targetIndex);
+    console.log("TargetIndex", targetIndex,this.selectedOption);
     
     this.token.optionList.forEach( (value,index) => {
       if(value.isCorrect && value.id !== targetIndex){

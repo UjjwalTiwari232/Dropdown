@@ -109,14 +109,21 @@ p:empty:not(:focus)::before {
 }
 
 .btn-insertToken {
-
   border: 1px solid #ccc;
-  padding: 5px;
+  padding: 5px 10px;
   z-index: 1;
+  background: #646464;
   position: absolute;
-  top: -46px;
-  width: 200px;
-  left: 80px;
+  top: -30px;
+  text-transform: uppercase;
+  font-weight: 600;
+  left: 0;
+}
+.btn-insertToken > mat-icon {
+  width: 100%;
+}
+.btn-insertToken:hover {
+  background: #666666;
 }
 
 .input-question {
@@ -125,6 +132,11 @@ p:empty:not(:focus)::before {
   margin: 10px;
 
 }
+
+[contentEditable=true]:empty:before {
+      content: attr(placeholder);
+      opacity: 0.6;
+    }
 
 /*                        */
 .disabled-class{

@@ -45,6 +45,7 @@
   </div>
 
   <div class="topBanner">
+
     <div class="banner" routerLink="/">
         <button class="btnBanner">1</button>
         <span>Question Properties</span>
@@ -64,24 +65,19 @@
     <div class="input-question">
       <p #input 
         data-placeholder="Insert Question here..."
-         
          contenteditable="true" 
          (focus)="onFocus()" 
          (blur)="onBlur()"
          class="input-div"
          tabindex="0">
       </p>
-      
-      <div>
-        <button 
-          mat-icon-button 
-          *ngIf="isFocused" 
+        <button
           (click)="addText()" 
+          *ngIf="isFocused"
           (mousedown)="onFocusButton()"
           class="btn-insertToken">
-          <mat-icon>Close  </mat-icon>
+          Add Token
         </button>
-      </div>
     </div>
     
     <br />
@@ -90,7 +86,7 @@
       <button (click)="addToken()">Add Another Token</button>
     </div> -->
     <br />
-    
+  
     <div class="tokens"  [ngClass]="{'disabled-class': TokenElement.length === 0}" *ngFor="let i of TokenList" >
       <app-token [token] = "i" (changesInToken)="updateTheList($event)" ></app-token>
       
