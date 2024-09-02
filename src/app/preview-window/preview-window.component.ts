@@ -223,7 +223,7 @@ export class PreviewWindowComponent implements OnInit {
       // Loop through options to find the selected option ID
       this.tokenList[TokenId].optionList.forEach((option, i) => {
         if (option.id === selectedOptId) {
-          OptionId = i;
+          OptionId = option.id;
         }
       });
 
