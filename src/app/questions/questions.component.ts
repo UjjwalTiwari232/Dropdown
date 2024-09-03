@@ -46,7 +46,6 @@ export class QuestionsComponent implements OnInit {
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    console.log("Questions OnInit Called");
   }
 
   onFocus() {
@@ -85,7 +84,6 @@ export class QuestionsComponent implements OnInit {
     };
 
     this.TokenList.push(newToken);
-    console.log(this.TokenList.length);
   }
 
   addOptions(id: number) {
@@ -108,7 +106,6 @@ export class QuestionsComponent implements OnInit {
     this.TokenList.forEach((value, index) => {
       if (value.id === updatedToken.id) {
         value.optionList = updatedToken.optionList;
-        console.log("Token", updatedToken.id, "is updated and has OptionList length of", value.optionList);
       }
     });
   }
@@ -150,11 +147,14 @@ export class QuestionsComponent implements OnInit {
 
     if (!sel || sel.rangeCount === 0) return;
 
+    
     const range = sel.getRangeAt(0);
+    if((range.startContainer.parentElement?.className !== 'input-question') && (range.startContainer.parentElement?.className !== 'input-div') )  {
+      
+      return ;
+    } 
+    if((range.commonAncestorContainer.parentElement?.className!='input-question')  && (range.commonAncestorContainer.parentElement?.className!='input-div')) return; 
     // if(range.startContainer.parentElement?.className !== 'input-div') return;
-    console.log("Range", range, sel);
-
-    console.log(el.innerHTML);
 
     // Create the new span element with non-editable styles
     const span = document.createElement('span');
@@ -163,7 +163,6 @@ export class QuestionsComponent implements OnInit {
     span.style.padding = '2px 4px';
     span.style.margin = '4px';
     span.style.cursor = 'pointer';
-    span.style.userSelect = 'auto'
     span.textContent = 'Token';
     span.className = 'span-token';
     span.setAttribute('contentEditable', 'false');
@@ -201,25 +200,7 @@ export class QuestionsComponent implements OnInit {
 
 
 checkIfCorrrectOptionAdded():boolean{
-
-  // let allSelected = false;
-
-  // this.TokenList.forEach( (val,index)=>{
-  //   let oneOptionIsSelected = false;
-  //   val.optionList.forEach((value ,i)=>{
-  //     if(value.isCorrect ){
-  //       oneOptionIsSelected = true;
-  //     }
-  //   })
-  //   if(!oneOptionIsSelected){
-  //     allSelected = true;
-  //   }
-  // })
-  // return allSelected;
-
-
   let outList = this.TokenList;
-  // console.log("list of OOOOOOOOOOOOOOOOOOOOOO", outList);
   for(let j=0;j<outList.length;j++){
     let anyoneselected = false;
     let list = outList[j].optionList;
@@ -236,27 +217,6 @@ checkIfCorrrectOptionAdded():boolean{
   }
   return false;
 
-  // this.TokenList.forEach((val, index)=>{
-  //   let anyoneselected = false;
-  //   // val.optionList.forEach((vall,index) =>{
-  //   //   if(vall.isCorrect){
-  //   //     anyoneselected = true
-  //   //     // break;
-  //   //   }
-  //   // })
-  //   let list = val.optionList;
-  //   for(let i=0;i<list.length;i++){
-  //     if(list[i].isCorrect){
-  //       anyoneselected = true;
-  //       break;
-  //     }
-  //   }
-  //   if(anyoneselected === false){
-  //     // alloptionselected = false
-  //     return false;
-  //     //return !alloptionselected
-  //   }
-  // })
 }
 
 
@@ -294,18 +254,13 @@ checkIfCorrrectOptionAdded():boolean{
       const startContainer = range.startContainer;
       const findClosestTokenInParagraph = (paragraph: HTMLElement): number | null => {
 
-        console.log("test", paragraph, paragraph.children);
-        console.log("before timeout: ", this.daalnakuch![this.daalnakuch!.length-1].getAttribute('data-id')!);
         let deletedArray = paragraph.children;
         let originalArray = this.daalnakuch;
-        // console.log("yoooooooooooo",deletedArray,originalArray)
         for(let i=0;i<originalArray!.length;i++){
           let notFound = true;
           for(let j=0;j<deletedArray.length;j++){
-            // console.log("yoooooooooooo",deletedArray[j].getAttribute('data-id') , originalArray![i].getAttribute('data-id'));
             if(deletedArray[j].getAttribute('data-id') === originalArray![i].getAttribute('data-id')){
               notFound = false;
-              // console.log("insideLoop",deletedArray[j].getAttribute('data-id') , originalArray![i].getAttribute('data-id'));
               break;
             }
           }
@@ -318,11 +273,8 @@ checkIfCorrrectOptionAdded():boolean{
       const paragraph = this.input.nativeElement as HTMLElement;
 
       setTimeout(() => {
-
         const tokenId = findClosestTokenInParagraph(paragraph);
-        console.log(tokenId);
         if (tokenId) {
-          console.log("id that we are getting", tokenId);
           this.TokenElement = this.TokenElement.filter(token => token !== tokenId)
           if(this.TokenList.length === 1){
             this.TokenList[0].optionList = [ {
@@ -347,9 +299,6 @@ checkIfCorrrectOptionAdded():boolean{
           const paragraph = this.input.nativeElement as HTMLElement;
           this.daalnakuch = [...Array.from(paragraph.children)] as HTMLElement[];
           event.preventDefault();
-
-          console.log(`Token with ID ${tokenId} removed from list`);
-
         }
       },)
 
@@ -357,9 +306,7 @@ checkIfCorrrectOptionAdded():boolean{
   }
 
   saveData(){
-    console.log("clicked");
     const paragraph = this.input.nativeElement as HTMLElement;
-    console.log(paragraph)
     if(this.TokenElement.length === 0 ){
       throw alert("Add Aleast One Token")
     }

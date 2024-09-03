@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AppService } from '../shared/DataService';
-import { IToken } from '../shared/interface';
+import { IOption, IToken } from '../shared/interface';
 import { event } from 'jquery';
 
 @Component({
@@ -12,7 +12,7 @@ export class PreviewWindowComponent implements OnInit {
   tokenList: IToken[] = [];
   @ViewChild('question') queston!: ElementRef;
   selectedOption: string = '';
-
+  orginialQuestion = ''
   constructor(
     private appService: AppService,
     private el: ElementRef,
@@ -26,12 +26,11 @@ export class PreviewWindowComponent implements OnInit {
     this.tokenList = this.appService.getTokenList();
     let questionElement = this.appService.getQuestionElement();
 
-    // Log fetched data
-    console.log(this.tokenList);
-    console.log(questionElement);
+
 
     // Parse and modify HTML
     this.replaceSpansWithSelects(questionElement.innerHTML);
+    this.orginialQuestion = questionElement.innerHTML;
   }
 
   replaceSpansWithSelects(htmlString: string): void {
@@ -51,20 +50,23 @@ export class PreviewWindowComponent implements OnInit {
       select.id = "select1";
       select.style.margin = '0px 5px 0px 5px'
       select.setAttribute('Token-index', index.toString());
-      console.log("select :" , select)
       select.addEventListener('change', (event) => this.onSelected(event));
       // Add options to the <select> element
+      const option = document.createElement('option');
+      option.textContent = "Select";
+      option.setAttribute("default","true");
+      option.setAttribute("selection","disabled");
+      option.setAttribute('option-index', '-1');
+      select.appendChild(option);
       this.tokenList[index].optionList.forEach((token, index) => {
 
         const option = document.createElement('option');
         option.textContent = "";
-        // option.textContent = "Select";
-        // option.setAttribute("default","true");
-        // option.setAttribute("selection","disabled");
+        
         if (token.option != undefined && token.option != null) {
           option.textContent = token.option;
           option.value = token.option;
-          option.setAttribute('option-index', index.toString());
+          option.setAttribute('option-index', token.id.toString());
           // option.value = token.id.toString();
 
         }
@@ -77,120 +79,21 @@ export class PreviewWindowComponent implements OnInit {
     });
 
     // Update the view with modified HTML
-    console.log(this.el.nativeElement.children[2].children[1]);
-    console.log(doc.body.innerHTML);
     this.el.nativeElement.children[2].children[1].innerHTML += doc.body.innerHTML;
   }
 
 
 
-
-
-
-
-
-
-    // checkAnswer() {
-    //   // Get the 'queston' element
-    //   const val = this.queston.nativeElement;
-
-    //   // Get the 'ans' element
-    //   const ansElement = document.getElementById("select");
-
-    //   // Log the question element
-    //   console.log("Question:", val, ansElement);
-
-    //   // Create a temporary container to parse the HTML
-    //   const parser = new DOMParser();
-    //   const doc = parser.parseFromString(val.innerHTML, 'text/html');
-
-    //   // Select all <select> elements
-    //   const selectElements = doc.querySelectorAll('select');
-
-
-
-    //   selectElements.forEach((select, index) => {
-
-    //     let ansValue = '';
-    //     let TokenId = -1;
-    //     let Option;
-    //     let OptionId = -1;
-    //     // console.log("position",select);
-    //     // Check if 'ans' element exists
-    //     // if (select) {
-    //     //   // Cast ansElement to HTMLInputElement or HTMLSelectElement based on your use case
-    //     // ansValue = (select as HTMLInputElement | HTMLSelectElement).value;
-        
-    //     let temp = (select as HTMLInputElement | HTMLSelectElement);
-    //     console.log("ZZZZZZZZZZZZ", temp);
-    //     console.log("ZZZZZZZZZZZZval", temp.value);
-
-  
-
-    //     ansValue = (select as HTMLInputElement | HTMLSelectElement).value;
-
-
-    //     console.log("ansValue: ", ansValue);
-    //     TokenId = parseInt((select as HTMLInputElement | HTMLSelectElement).getAttribute('token-index')!);
-    //     Option = (select as HTMLInputElement | HTMLSelectElement).children;
-    //     // console.log("Answer",Option,TokenId);
-
-    //     for (let i = 0; i < Option.length; i++) {
-    //       let a = (Option[i] as HTMLInputElement | HTMLSelectElement)
-    //       if (a.value === ansValue) {
-    //         OptionId = parseInt(a.getAttribute("option-index")!);
-    //         break;
-    //       }
-    //     }
-    //     // } 
-    //     console.log("Answer:", ansValue, TokenId, OptionId);
-    //     // else {
-    //     //   console.log("Element with id 'ans' not found.");
-    //     // }
-
-
-    //     if (TokenId === -1 || OptionId === -1) {
-    //       throw alert("Select the Options First")
-
-    //     }
-
-
-    //     // Get the selected value from the select element
-    //     let selectedValue = ansValue;
-    //     console.log("Selected Value:", selectedValue);
-    //     // this.tokenList[0].optionList.forEach( (val,index) => {
-    //     //   if()
-    //     // })
-    //     // Create a <div> to replace the <select> element
-    //     const containerDiv = document.createElement('div');
-    //     containerDiv.style.width = '135px';
-    //     containerDiv.style.margin = '0px 5px 0px 5px';
-    //     containerDiv.style.display = 'flex';
-
-    //     const checkIcon = document.createElement('span');
-    //     checkIcon.innerHTML = '<i class="fa-solid fa-check" style="color: #ffffff;"></i>';
-    //     checkIcon.style.background = '#035800';
-    //     checkIcon.style.padding = '5px';
-
-    //     const optionSelected = document.createElement('p');
-    //     optionSelected.textContent = this.tokenList[TokenId].optionList[OptionId].option;
-    //     optionSelected.style.background = '#035800';
-    //     optionSelected.style.padding = '5px';
-
-    //     containerDiv.appendChild(optionSelected);
-    //     containerDiv.appendChild(checkIcon);
-
-    //     // Replace the <select> element with the new container
-    //     select.parentNode!.replaceChild(optionSelected, select);
-    //   });
-    // }
-  // }
-
   onSelected(event: Event): void {
-    console.log("inside selected ")
+
     const selectElement = event.target as HTMLSelectElement;
-    console.log('Selected value:', selectElement.value);
     // Implement your handling logic here
+  }
+
+  tryAgain(){
+    this.el.nativeElement.children[2].children[1].innerHTML = "";
+  
+    this.replaceSpansWithSelects(this.orginialQuestion);
   }
 
   checkAnswer() {
@@ -206,55 +109,105 @@ export class PreviewWindowComponent implements OnInit {
 
     selectElements.forEach((select) => {
       // Ensure `select` is properly cast
+
+      
       const selectElement = select as HTMLSelectElement;
 
       // Get the selected value from the select element
       let ansValue = (select as HTMLSelectElement);
-      console.log(ansValue)
-      console.log("ansValue: ", ansValue.selectedOptions[0].attributes.getNamedItem('option-index')?.value);
+
 
       // Find the token-index attribute
       const tokenIndexAttr = selectElement.getAttribute('token-index');
       const TokenId = tokenIndexAttr ? parseInt(tokenIndexAttr, 10) : -1;
 
       // Initialize variables for option ID
-      let OptionId = -1;
+      let CorrectOptionId = -1;
+      let WrongOptionId = -1;
       let selectedOptId = parseInt(ansValue.selectedOptions[0].attributes.getNamedItem('option-index')?.value!);
+      
       // Loop through options to find the selected option ID
       this.tokenList[TokenId].optionList.forEach((option, i) => {
-        if (option.id === selectedOptId) {
-          OptionId = option.id;
+        if (option.id === selectedOptId && ansValue.value === option.option && option.isCorrect) {
+          CorrectOptionId = i;
+        }
+        else if(option.id === selectedOptId && ansValue.value === option.option && !option.isCorrect){
+          WrongOptionId = i;
         }
       });
 
-      console.log("Answer:", ansValue, TokenId, OptionId);
 
-      if (TokenId === -1 || OptionId === -1) {
+
+      if (ansValue.value === 'Select') {
         alert("Select the Options First");
         return; // Exit the function if invalid
       }
+      if(CorrectOptionId != -1){
+        // Create a <div> to replace the <select> element
+        const containerDiv = document.createElement('span');
+        containerDiv.style.width = '135px';
+        containerDiv.style.margin = '0px 5px 0px 5px';
+        containerDiv.style.display = 'inline-flex';
+  
+        const checkIcon = document.createElement('span');
+        checkIcon.innerHTML = '<i class="fa-solid fa-check" style="color: #ffffff;"></i>';
+        checkIcon.style.background = '#035800';
+        checkIcon.style.padding = '5px';
+        checkIcon.style.alignItems = 'center'
+        checkIcon.style.justifyContent = 'center'
+        checkIcon.style.width = '30px';
+  
+        const optionSelected = document.createElement('span');
+        optionSelected.textContent = this.tokenList[TokenId].optionList[CorrectOptionId].option;
+        optionSelected.style.border = '1px solid #035800';
+        optionSelected.style.padding = '5px';
+        optionSelected.style.width = '105px';
+        
+  
+        containerDiv.appendChild(optionSelected);
+        containerDiv.appendChild(checkIcon);
+  
+        // Replace the <select> element with the new container
+        select.parentNode!.replaceChild(containerDiv, select);
 
-      // Create a <div> to replace the <select> element
-      const containerDiv = document.createElement('span');
-      containerDiv.style.width = '135px';
-      containerDiv.style.margin = '0px 5px 0px 5px';
-      containerDiv.style.display = 'inline-flex';
 
-      const checkIcon = document.createElement('span');
-      checkIcon.innerHTML = '<i class="fa-solid fa-check" style="color: #ffffff;"></i>';
-      checkIcon.style.background = '#035800';
-      checkIcon.style.padding = '5px';
+        //Another way to do the Same thing just We will Requried to store the List of the Span Avaiable in the Question
+        // select.style.display = 'none'
+        // let span = document.getElementsByClassName("main-answer-span") as HTMLSelectElement
+        // span.style.display = 'inline-flex'
+      }
+      else if(WrongOptionId != -1){
+        // // Create a <div> to replace the <select> element
+        const containerDiv = document.createElement('span');
+        containerDiv.style.width = '135px';
+        containerDiv.style.margin = '0px 5px 0px 5px';
+        containerDiv.style.display = 'inline-flex';
+  
+        const checkIcon = document.createElement('span');
+        checkIcon.innerHTML = '<i class="fa-solid fa-xmark" style="color: #ffffff;"></i>';
+        checkIcon.style.background = '#f42020';
+        checkIcon.style.padding = '5px';
+        checkIcon.style.alignItems = 'center'
+        checkIcon.style.justifyContent = 'center'
+        checkIcon.style.width = '30px';
+  
+        const optionSelected = document.createElement('span');
+        optionSelected.textContent = this.tokenList[TokenId].optionList[WrongOptionId].option;
+        optionSelected.style.border = '1px solid #f42020';
+        optionSelected.style.padding = '5px';
+        optionSelected.style.width = '105px';
+  
+        containerDiv.appendChild(optionSelected);
+        containerDiv.appendChild(checkIcon);
+  
+        // Replace the <select> element with the new container
+        select.parentNode!.replaceChild(containerDiv, select);
 
-      const optionSelected = document.createElement('span');
-      optionSelected.textContent = this.tokenList[TokenId].optionList[OptionId].option;
-      optionSelected.style.border = '1px solid #035800';
-      optionSelected.style.padding = '5px';
-
-      containerDiv.appendChild(optionSelected);
-      containerDiv.appendChild(checkIcon);
-
-      // Replace the <select> element with the new container
-      select.parentNode!.replaceChild(containerDiv, select);
+        //Another way to do the Same thing just We will Requried to store the List of the Span Avaiable in the Question
+        // select.style.display = 'none'
+        // let span = document.getElementById("main-Wronganswer-span") as HTMLSelectElement
+        // span.style.display = 'inline-flex'
+      }
     });
   }
 }

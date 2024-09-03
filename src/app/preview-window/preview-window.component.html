@@ -10,11 +10,19 @@
 <div class="Question">
     <div class="Question-id">Q 1:</div> 
     <div class="Question-pos" #question>
-    
+        <span class="main-answer-span">
+            <span class="main-answer-span-textSection"></span>
+            <span class="main-answer-span-iconSection" ><i class="fa-solid fa-check" style="color: #ffffff;"></i></span>
+        </span>
+        <span id="main-Wronganswer-span">
+            <span class="main-Wronganswer-span-iconSection" ></span>
+            <span class="main-Wronganswer-span-textSection"><i class="fa-solid fa-xmark" style="color: #ffffff;"></i></span>
+        </span>
+
     </div>
 </div>
 
 <div class="canvasDiv">
-    
+    <button class="btn checkBtn" (click)="tryAgain()">Try Again</button>
     <button class="btn checkBtn" (click)="checkAnswer()">check</button>
 </div>

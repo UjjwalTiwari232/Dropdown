@@ -39,19 +39,45 @@
 }
 /*                                             div-Question                                       */
 .Question{
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     margin-top: 25px;
     margin-left: 20px;
 }
 .Question-pos{
-    width: 97%;
+    display: inline-flex;
+    /* width: 97%; */
     /* margin-top: 25px; */
     margin-right: 25px;
 }
 
+.main-answer-span ,#main-Wronganswer-span{ 
+    display: none;
+    margin: 0px 5px 0px 5px;
+    width: 135px;
+}
+.main-answer-span-textSection{
+    border:1px solid #035800;
+    padding: 5px;
+}
+
+.main-answer-span-iconSection{
+    background-color: #035800;
+    padding: 5px;
+}
+
+.main-Wronganswer-span-textSection{
+    border: 1px solid #f42020;
+    padding: 5px;
+}
+
+.main-Wronganswer-span-iconSection{
+    background-color: #f42020;
+    padding: 5px;
+}
 .Question-id{
-    width: 3%;
+    /* display: inline-flex; */
+    /* width: 3%; */
     /* margin-right: 8px; */
 }
 /*                                                       CheckButton                                 */
