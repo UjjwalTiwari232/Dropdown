@@ -22,11 +22,17 @@ export class OptionComponent implements OnInit {
   }
 
   deleteToken(id: number) {
-    this.optionList = this.optionList.filter(option => option.id !== id);
-    this.optionList.forEach((value, index) => {
-        value.id = index + 1;
-    });
-    this.changesInOptionList.emit(this.optionList)
+    if(this.optionList.length>2){
+      this.optionList = this.optionList.filter(option => option.id !== id);
+      this.optionList.forEach((value, index) => {
+          value.id = index + 1;
+      });
+      this.changesInOptionList.emit(this.optionList)
+
+    }
+    else{
+      throw alert("There Should Atleat be Two Option for a Token")
+    }
 
   }
 

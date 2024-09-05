@@ -121,26 +121,6 @@ export class QuestionsComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
   addText() {
     const el = this.input.nativeElement;
     const sel = window.getSelection();
@@ -154,7 +134,6 @@ export class QuestionsComponent implements OnInit {
       return ;
     } 
     if((range.commonAncestorContainer.parentElement?.className!='input-question')  && (range.commonAncestorContainer.parentElement?.className!='input-div')) return; 
-    // if(range.startContainer.parentElement?.className !== 'input-div') return;
 
     // Create the new span element with non-editable styles
     const span = document.createElement('span');

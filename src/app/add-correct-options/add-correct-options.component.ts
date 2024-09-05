@@ -63,6 +63,19 @@ export class AddCorrectOptionsComponent implements OnChanges {
   }
 
   onOptionChange(event: any) {
+    let anyOptionEpt = false;
+    this.token.optionList.forEach((val,index) => {
+      if(val.option.length == 0){
+        anyOptionEpt = true;
+        
+      }
+    })
+    if(anyOptionEpt){
+      event.target.selectedIndex = 0;
+      throw alert("Please First Enter Options");
+      // event.target.options[].value
+      return;
+    }
     const selectedOption = event.target.options[event.target.selectedIndex].value;
     let targetIndex = event.target.selectedIndex ;
     if(targetIndex === 0 ){
